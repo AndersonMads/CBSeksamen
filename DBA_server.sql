@@ -1,7 +1,9 @@
+select *
+from today_date
 
 CREATE TABLE [DBA].[dbo].[items] (
 	id int IDENTITY(1,1) NOT NULL,
-	i_name varchar NOT NULL,
+	i_name varchar(255) NOT NULL,
 	category_id int NOT NULL,
 	img image NOT NULL,
 	price decimal NOT NULL,
@@ -19,7 +21,7 @@ CREATE TABLE [DBA].[dbo].[items] (
 GO
 CREATE TABLE [DBA].[dbo].[locations] (
 	id int IDENTITY(1,1) NOT NULL,
-	region varchar NOT NULL,
+	region varchar(255) NOT NULL,
   CONSTRAINT [PK_LOCATIONS] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -29,8 +31,8 @@ CREATE TABLE [DBA].[dbo].[locations] (
 GO
 CREATE TABLE [DBA].[dbo].[users] (
 	id int IDENTITY(1,1) NOT NULL,
-	username varchar NOT NULL UNIQUE,
-	pswd varchar NOT NULL,
+	username varchar(255) NOT NULL UNIQUE,
+	pswd varchar(255) NOT NULL,
 	adm bit NOT NULL,
 	gold bit NOT NULL,
 	date_created date NOT NULL DEFAULT(SYSDATETIME()),
@@ -44,7 +46,7 @@ CREATE TABLE [DBA].[dbo].[users] (
 GO
 CREATE TABLE [DBA].[dbo].[categories] (
 	id int IDENTITY(1,1) NOT NULL,
-	c_name varchar NOT NULL,
+	c_name varchar(255) NOT NULL,
   CONSTRAINT [PK_CATEGORIES] PRIMARY KEY CLUSTERED
   (
   [id] ASC

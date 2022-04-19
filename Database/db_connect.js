@@ -1,6 +1,7 @@
 var Connection = require('tedious').Connection
 var Request = require('tedious').Request
 
+
 const config = require('./config.json')
 var connection = new Connection(config)
 
@@ -20,7 +21,7 @@ connection.connect()
 
 
 function executeSQL(){
-    Request = new Request("SELECT * FROM dbo.jobs", function(err){
+    Request = new Request("SELECT * FROM dbo.users", function(err){
     if (err){
         console.log(err)}})
 
