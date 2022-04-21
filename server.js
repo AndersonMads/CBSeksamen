@@ -5,6 +5,7 @@ const app = express();
 
 const insertUsers = require('./model/users');
 const getUsers = require('./model/users');
+const insertItem = require('./model/items');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,17 +22,17 @@ app.listen(PORT,function () {
 
 
 const dboperations = require(__dirname + '/model/users.js')
-
+const dbOperations = require(__dirname + '/model/items.js')
 
 //Login
-app.post('/loginInput', function (req,res) {
+app.post('/login', function (req,res) {
 
     let username = req.body.username
     let password = req.body.password
 
-    
+
     dboperations.getUsers(username,password).then(result => {
-        res.status(200).json(result)
+        res.status(201).json(result)
     })
 });
 
@@ -51,3 +52,15 @@ app.post('/new', function (req,res) {
 
 
 console.log(fweljfewjfpew)
+//Laver item
+app.post('/newItemCreated', function (req, res){
+    let price = req.body.price
+    let category = req.body.category
+    let i_name = req.body.itemName
+    let reusables = req.body.reusables
+
+    dbOperations.insertItem(i_name,category,price,reusables).then(result => {
+        res.status(201).json(result)
+    })
+   
+})

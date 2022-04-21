@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>  
+</head>
+<body>
+    <h1>Post item</h1>
+
+    <!-- Opret vare -->
+    <form>
+        Choose category
+        <br>
+        <select name="category" id="category_id">
+            <option value=1>Electronics</option>
+            <option value=2>Home</option>
+            <option value=3>Clothing</option>
+            <option value=4>Bathroom</option>
+            <option value=5>Sporting goods</option>
+          </select>
+        <br>
+        Select desired price
+        <br>
+        <input placeholder="500" id="price" type="number" required>
+        <br>
+        Item name
+        <br>
+        <input placeholder="Television" id="i_name" required>
+          <br>
+        <br>
+          <select name="reusables" id="reusables">
+              <option value=1>Yes</option>
+              <option value=0>No</option>
+            </select>
+          <br>
+          <br>
+        <button type="submit" id="submit">Register</button>
+    </form> 
+    <br>
+    Already have a user, login <a href="login.html"> here </a>
+    <br>
+    <a href="http://localhost:3000/">
+        <button>Homepage</button>
+    </a>
+
+<script src="createItem.js" defer></script> 
+</body>
+</html>
