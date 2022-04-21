@@ -1,11 +1,13 @@
-select *
-from today_date
+INSERT INTO categories (c_name)
+VALUES ('Sporting_goods')
+
+SELECT *
+FROM items
 
 CREATE TABLE [DBA].[dbo].[items] (
 	id int IDENTITY(1,1) NOT NULL,
 	i_name varchar(255) NOT NULL,
 	category_id int NOT NULL,
-	img image NOT NULL,
 	price decimal NOT NULL,
 	date_created date NOT NULL DEFAULT(SYSDATETIME()),
 	user_id int NOT NULL,

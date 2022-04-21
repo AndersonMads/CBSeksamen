@@ -47,3 +47,7 @@ app.post('/new', function (req,res) {
     })
     console.log(username,password,location_id)
 });
+
+
+
+console.log(fweljfewjfpew)

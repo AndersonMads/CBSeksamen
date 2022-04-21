@@ -23,8 +23,12 @@ document.addEventListener('DOMContentLoaded',function () {
                 body: JSON.stringify(loginUser)
             }).then(response => response.json())
             .then(response => {
-                window.alert('Logged in');
-                // location.href = "/index.html";     
+                if (response) {
+                    localStorage.setItem("loggedInUser", JSON.stringify(userInput));
+                    location.href = "/";
+                  } else {
+                    window.alert('Username or password incorrect');
+                  }     
             })
             .catch((error) => {
                 console.log('Error:', error)
