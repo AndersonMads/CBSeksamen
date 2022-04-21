@@ -9,8 +9,9 @@ async function getUsers (username,password) {
         let tables = pool.request()
         .input('username', sql.VarChar(255), username)
         .input('pswd', sql.VarChar(255), password)
-        .query(`SELECT * FROM dbo.users WHERE username=@username AND pswd=@pswd`);
+        .query(`SELECT * FROM dbo.users WHERE username=@username AND pswd=@pswd`, [username, password]);
         return (await tables).recordsets;
+        console.log(username,password)
     } catch (error) {
         console.log(error)
     }
