@@ -11,14 +11,29 @@
 
     <!-- Registrer bruger -->
     <form>
-        <input placeholder="Username" id="username" required>
+        Choose Username
         <br>
-        <input placeholder="Password" id="password" required>
+        <input placeholder="example" id="username" required>
         <br>
+        Choose Password
+        <br>
+        <input placeholder="*****" id="password" required>
+        <br>
+        Choose Region
+        <br>
+        <select name="region" id="region">
+            <option value=1>Hovedstaden</option>
+            <option value=2>Sjaelland</option>
+            <option value=3>Syddanmark</option>
+            <option value=4>Midtjylland</option>
+            <option value=5>Nordjylland</option>
+          </select>
+          <br>
+          <br>
         <button type="submit" id="submit">Register</button>
     </form> 
 
 
-<script src="register.js" defer></script> 
+<script src="create_user.js" defer></script> 
 </body>
 </html>

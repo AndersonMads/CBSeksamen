@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+
+    <h1>Homepage</h1>
+
+    <!-- Knapper til at navigere rundt til de forskellige endpoints -->
+    <a href="create_user.html">
+        <button>Register</button>
+    </a>
+    <a href="login.html">
+        <button id="logoutButton">Logout</button>
+    </a> 
+    <a href="createItem.html">
+        <button>Add item</button>
+    </a>
+    <a href="myItems.html">
+        <button>My item(s)</button>
+    </a>
+
+    <!-- Viser alle brugers items ud fra kategori -->
+    <h2>Show all users items</h2>
+<br>
+    <select name="category" id="category" required>
+    <option value="all">All</option>
+    <option value="indoor">Indoor</option>
+    <option value="outdoor">Outdoor</option>
+    <option value="clothing">Clothing</option>
+    <option value="vehicle">Vehicle</option>
+    <option value="other">Other</option>
+    </select>
+
+    <button type="submit" id="submitCategory">Show listed items</button>
+
+    <div id="product"> </div>
+<br>
+    <table style="background-color: lemonchiffon;" id="list"> </table>
+   
+    <script src="index.js" defer></script>
+</body>
+</html>

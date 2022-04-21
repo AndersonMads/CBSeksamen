@@ -6,21 +6,18 @@ document.addEventListener('DOMContentLoaded',function () {
             // preventDefault sikrer at siden ikke opdatere imens form input oplyses
             e.preventDefault();
 
-            
             let usernameInput = document.getElementById('username').value;
             let passwordInput = document.getElementById('password').value;
-
-            // Genererer et unikt ID til bruger
-            let newID = 'id' + Date.now().toString(36);
+            let regionInput = document.getElementById('region').value;
 
             let newUser = {
-                userid: newID,
                 username: usernameInput,
-                password: passwordInput
+                password: passwordInput,
+                region: regionInput
             }
             
             //Poster givne oplysninger
-            fetch('http://localhost:3000/users/new', {
+            fetch('http://localhost:3000/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,7 +26,7 @@ document.addEventListener('DOMContentLoaded',function () {
             }).then(response => response.json())
             .then(response => {
                 window.alert('User created');
-                location.href = "/login.html";     
+                // location.href = "/login.html";     
             })
             .catch((error) => {
                 console.log('Error:', error)
