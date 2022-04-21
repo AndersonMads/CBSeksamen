@@ -1,10 +1,15 @@
 var config = require('../Database/config.json')
 var sql = require('mssql');
 
-async function getUsers () {
+
+
+async function getUsers (username,password) {
     try {
         let pool = await sql.connect(config);
-        let tables = pool.request().query('SELECT * from dbo.users');
+        let tables = pool.request()
+        .input('username', sql.VarChar(255), username)
+        .input('pswd', sql.VarChar(255), password)
+        .query(`SELECT * FROM dbo.users WHERE username=@username AND pswd=@pswd`);
         return (await tables).recordsets;
     } catch (error) {
         console.log(error)

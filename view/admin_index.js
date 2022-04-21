@@ -8,25 +8,23 @@ document.addEventListener('DOMContentLoaded',function () {
 
             let usernameInput = document.getElementById('username').value;
             let passwordInput = document.getElementById('password').value;
-            let regionInput = document.getElementById('region').value;
 
-            let newUser = {
+            let loginUser = {
                 username: usernameInput,
                 password: passwordInput,
-                region: regionInput
             }
             
             //Poster givne oplysninger
-            fetch('http://localhost:3000/new', {
-                method: 'POST',
+            fetch('http://localhost:3000/login', {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newUser)
+                body: JSON.stringify(loginUser)
             }).then(response => response.json())
             .then(response => {
                 window.alert('User created');
-                location.href = "/login.html";     
+                // location.href = "/login.html";     
             })
             .catch((error) => {
                 console.log('Error:', error)
