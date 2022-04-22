@@ -30,10 +30,13 @@ app.post('/login', function (req,res) {
     let username = req.body.username
     let password = req.body.password
 
-
     dboperations.getUsers(username,password).then(result => {
-        res.status(201).json(result)
-    })
+        if(result.rowsAffected[0] > 0) {
+            res.status(200).json(result.recordset[0].id)
+        } else {
+            res.status(404).send(false)
+        };
+    });
 });
 
 //Registrer bruger
@@ -49,18 +52,16 @@ app.post('/new', function (req,res) {
     console.log(username,password,location_id)
 });
 
-
-
-console.log(fweljfewjfpew)
 //Laver item
 app.post('/newItemCreated', function (req, res){
+    let user_id = req.body.user_id
     let price = req.body.price
     let category = req.body.category
     let i_name = req.body.itemName
     let reusables = req.body.reusables
 
-    dbOperations.insertItem(i_name,category,price,reusables).then(result => {
+    dbOperations.insertItem(i_name,category,price,user_id,reusables).then(result => {
         res.status(201).json(result)
-    })
+    });
    
-})
+});

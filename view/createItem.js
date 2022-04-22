@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded',function () {
+    const loggedIn = localStorage.getItem("user_id");
+    if (!loggedIn) { 
+        location.href = "/login.html";
+         window.alert('Not logged in');
+    }
 
     let submitButton = document.getElementById('submit');
 
@@ -12,6 +17,7 @@ document.addEventListener('DOMContentLoaded',function () {
             let reusablesInput = document.getElementById('reusables').value;
 
             let newItem = {
+                user_id: localStorage.user_id,
                 price: priceInput,
                 itemName: itemNameInput,
                 category: categoryInput,

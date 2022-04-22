@@ -1,18 +1,18 @@
 var config = require("../Database/config.json");
 var sql = require("mssql");
+const res = require("express/lib/response");
 
 async function getUsers(username, password) {
   try {
     let pool = await sql.connect(config);
-
-    let tables = pool
+    let getUser = pool
       .request()
       .input("username", sql.VarChar(255), username)
       .input("pswd", sql.VarChar(255), password)
-      .query(`SELECT * FROM dbo.users WHERE username=@username AND pswd=@pswd`);
-    return (await tables).recordsets;
+      .query(`SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd`);
+    return getUser;
   } catch (error) {
-    console.log(error);
+    return ;
   }
 }
 
