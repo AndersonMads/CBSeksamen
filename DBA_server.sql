@@ -7,11 +7,15 @@ FROM today_date
 SELECT *
 FROM items
 
+SELECT *
+FROM locations
+
+DELETE FROM users WHERE id<39 AND id>24;
 
 INSERT INTO items(i_name, category_id, price, date_created, user_id, reusables, follow, today_date_id)
 VALUES ('stol',4,300,'2022-04-21',3,1,0,1)
 
-SELECT i.i_name, i.price, i.date_created, i.reusables, i.follow, c.c_name, u.username, datediff(day,i.date_created,t.date_generated) as differ
+SELECT i.i_name, i.price, i.reusables, i.follow, i.date_created, c.c_name, u.username, datediff(day,t.date_generated,i.date_created)*(-1) as date_difference, u.gold, l.region
         FROM items as i
             INNER JOIN categories as c
                 ON c.id = i.category_id
@@ -19,6 +23,10 @@ SELECT i.i_name, i.price, i.date_created, i.reusables, i.follow, c.c_name, u.use
                 ON i.user_id = u.id
             INNER JOIN today_date as t
                 ON i.today_date_id = t.id
+            INNER JOIN locations as l
+                ON u.location_id = l.id
+                ORDER BY u.gold DESC
+
 
 
 ALTER TABLE [DBA].dbo.items

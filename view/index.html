@@ -24,6 +24,19 @@
     <!-- Viser alle brugers items ud fra kategori -->
     <h2>Show all users items</h2>
 <br>
+Reusables only?
+<br>
+<select name="reusables" id="reusables" required>
+    <option value=0>No</option>
+    <option value=1>Yes</option>
+</select>
+<br>
+Choose how many days since created
+<br>
+    <input type="number" id="date">
+<br>
+Choose category
+<br>
     <select name="category" id="category" required>
     <option value="all">All</option>
     <option value="Electronics">Electronics</option>
@@ -32,7 +45,23 @@
     <option value="Bathroom">Bathroom</option>
     <option value="other">Other</option>
     </select>
-
+<br>
+Choose max price
+<br>
+    <input placeholder ="Write max price here" type="number" id="price" name="price">
+<br>
+Choose location
+<br>
+    <select name="location" id="location" required>
+    <option value="all">All</option>
+    <option value="Hovedstaden">Hovedstaden</option>
+    <option value="Sjaelland">Sjaelland</option>
+    <option value="Nordjylland">Nordjylland</option>
+    <option value="Syddanmark">Syddanmark</option>
+    <option value="Midtjylland">Midtjylland</option>
+    </select>
+<br>
+<br>
     <button type="submit" id="submitCategory">Show listed items</button>
 
     <div id="product"> </div>
