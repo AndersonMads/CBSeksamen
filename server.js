@@ -69,3 +69,9 @@ app.get('/showItems', (req, res) => {
     });
 });
 
+
+app.get('/showOwnItems', (req, res) => {
+    dbOperations.showOwnItems().then(result => {
+        res.send(result.recordset)
+    });
+});

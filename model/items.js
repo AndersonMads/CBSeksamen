@@ -61,7 +61,19 @@ async function showItems() {
     }
   }
 
-
+  async function showOwnItems() {
+    try {
+      let pool = await sql.connect(config);
+      let showOwnItems = pool
+        .request()
+        .query(`SELECT * from items as i
+            INNER JOIN categories as c
+                ON c.id = i.category_id`)
+      return showOwnItems;
+    } catch (error) {
+      return ;
+    }
+  }
 
 
 
@@ -72,5 +84,6 @@ async function showItems() {
 
 module.exports = {
     insertItem: insertItem,
-    showItems: showItems
+    showItems: showItems,
+    showOwnItems: showOwnItems
 }
