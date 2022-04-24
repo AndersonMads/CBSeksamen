@@ -14,16 +14,19 @@ document.addEventListener('DOMContentLoaded', function() {
         //Indsætter tabelhovederne i html
         list.innerHTML = `
         <tr>
-            <th>Username</th>
             <th>Product name</th>
             <th>Price</th>
+            <th>Days since created</th>
             <th>Category</th>
-            <th>Image</th>
+            <th>Reusables</th>
+            <th>Username</th>
+            <th>Gold</th>
+            <th>Follow</th>
         </tr>
         `;
 
         //Henter dataen fra item.json og indsætter i tabellen ved at loope igennem med forEach. 
-        fetch("http://localhost:3000/items/showItems", {
+        fetch("http://localhost:3000/showItems", {
             method: "GET",
         })
         .then((response) => response.json())
@@ -37,21 +40,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     if(category === "all") {
                         list.innerHTML += `
                         <tr>
-                            <td>${item.username}</td> 
-                            <td>${item.productName}</td>       
-                            <td>${item.price}</td>
-                            <td>${item.category}</td>          
-                            <td>${item.image}</td>             
+                            <td>${item.i_name}</td> 
+                            <td>${item.price}</td>       
+                            <td>${item.differ}</td>
+                            <td>${item.c_name}</td>
+                            <td>${item.reusables}</td>
+                            <td>${item.username}</td>
+                            <td>${item.gold}</td> 
+                            <td>${item.follow}</td>                            
                         </tr>
                         `;
-                    } else if (item.category === category) {
+                    } else if (item.c_name === c_name) {
                         list.innerHTML += `
                         <tr>
-                            <td>${item.username}</td> 
-                            <td>${item.productName}</td>       
-                            <td>${item.price}</td>
-                            <td>${item.category}</td>          
-                            <td>${item.image}</td>             
+                            <td>${item.i_name}</td> 
+                            <td>${item.price}</td>       
+                            <td>${item.differ}</td>
+                            <td>${item.c_name}</td>
+                            <td>${item.reusables}</td>
+                            <td>${item.username}</td>
+                            <td>${item.gold}</td> 
+                            <td>${item.follow}</td>                    
                         </tr>
                         `;
                     };

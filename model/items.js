@@ -2,6 +2,8 @@ var config = require('../Database/config.json')
 var sql = require('mssql');
 
 
+
+//Laver item
 async function insertItem (i_name,category_id,price,user_id,reusables) {
     try {
         let pool = await sql.connect(config);
@@ -19,6 +21,26 @@ async function insertItem (i_name,category_id,price,user_id,reusables) {
     }
 }
 
+async function showItems() {
+    try {
+      let pool = await sql.connect(config);
+      let showItems = pool
+        .request()
+        .query(`SELECT i.i_name, i.price, i.reusables, i.follow, c.c_name, u.username, datediff(day,i.date_created,t.date_generated) as differ, u.gold
+        FROM items as i
+            INNER JOIN categories as c
+                ON c.id = i.category_id
+            INNER JOIN users as u
+                ON i.user_id = u.id
+            INNER JOIN today_date as t
+                ON i.today_date_id = t.id
+                ORDER BY u.gold DESC`)
+      return showItems;
+    } catch (error) {
+      return ;
+    }
+  }
+
 
 
 
@@ -29,5 +51,6 @@ async function insertItem (i_name,category_id,price,user_id,reusables) {
 
 
 module.exports = {
-    insertItem: insertItem
+    insertItem: insertItem,
+    showItems: showItems
 }

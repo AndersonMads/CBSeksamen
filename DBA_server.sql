@@ -1,8 +1,28 @@
-INSERT INTO categories (c_name)
-VALUES ('Sporting_goods')
+INSERT INTO today_date
+DEFAULT VALUES
+
+SELECT *
+FROM today_date
 
 SELECT *
 FROM items
+
+
+INSERT INTO items(i_name, category_id, price, date_created, user_id, reusables, follow, today_date_id)
+VALUES ('stol',4,300,'2022-04-21',3,1,0,1)
+
+SELECT i.i_name, i.price, i.date_created, i.reusables, i.follow, c.c_name, u.username, datediff(day,i.date_created,t.date_generated) as differ
+        FROM items as i
+            INNER JOIN categories as c
+                ON c.id = i.category_id
+            INNER JOIN users as u
+                ON i.user_id = u.id
+            INNER JOIN today_date as t
+                ON i.today_date_id = t.id
+
+
+ALTER TABLE [DBA].dbo.items
+ADD difference INT DEFAULT DATEDIFF(day,date_created,date_generated);
 
 CREATE TABLE [DBA].[dbo].[items] (
 	id int IDENTITY(1,1) NOT NULL,
@@ -13,14 +33,27 @@ CREATE TABLE [DBA].[dbo].[items] (
 	user_id int NOT NULL,
 	reusables bit NOT NULL,
 	follow bit NOT NULL,
-	today_date_id int NOT NULL DEFAULT '1',
+	today_date_id int NOT NULL DEFAULT 1,
   CONSTRAINT [PK_ITEMS] PRIMARY KEY CLUSTERED
   (
   [id] ASC
   ) WITH (IGNORE_DUP_KEY = OFF)
 
 )
+
 GO
+
+CREATE TABLE [DBA].[dbo].[today_date] (
+	id int NOT NULL DEFAULT 1,
+	date_generated date NOT NULL DEFAULT SYSDATETIME(),
+  CONSTRAINT [PK_TODAY_DATE] PRIMARY KEY CLUSTERED
+  (
+  [id] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+
 CREATE TABLE [DBA].[dbo].[locations] (
 	id int IDENTITY(1,1) NOT NULL,
 	region varchar(255) NOT NULL,
@@ -81,7 +114,6 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [items] CHECK CONSTRAINT [items_fk2]
 GO
-
 
 ALTER TABLE [users] WITH CHECK ADD CONSTRAINT [users_fk0] FOREIGN KEY ([location_id]) REFERENCES [locations]([id])
 ON UPDATE CASCADE

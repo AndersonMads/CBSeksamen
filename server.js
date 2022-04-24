@@ -3,10 +3,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
-const insertUsers = require('./model/users');
-const getUsers = require('./model/users');
-const insertItem = require('./model/items');
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -65,3 +61,11 @@ app.post('/newItemCreated', function (req, res){
     });
    
 });
+
+//Ser items
+app.get('/showItems', (req, res) => {
+    dbOperations.showItems().then(result => {
+        res.send(result.recordset)
+    });
+});
+

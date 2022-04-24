@@ -9,7 +9,7 @@ async function getUsers(username, password) {
       .request()
       .input("username", sql.VarChar(255), username)
       .input("pswd", sql.VarChar(255), password)
-      .query(`SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd`);
+      .query(`SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd UPDATE today_date SET date_generated=sysdatetime() WHERE id=1`);
     return getUser;
   } catch (error) {
     return ;
