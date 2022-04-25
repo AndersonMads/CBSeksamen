@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Gør det muligt at logge ud ved at fjerne localstorage.
+
     let logoutButton = document.getElementById('logoutButton');
+
     logoutButton.addEventListener('click', function() {
         localStorage.removeItem('user_id');
+        location.href = "/login";
     });
 
 
