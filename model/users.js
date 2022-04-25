@@ -35,7 +35,22 @@ async function insertUsers(username, password, location_id) {
   }
 }
 
+async function getAdmins(user_id) {
+  try {
+    let pool = await sql.connect(config);
+    let getAdmin = pool
+      .request()
+      .input("user_id", sql.Int, user_id)
+      .input("admin", sql.Bit, 1)
+      .query(`SELECT * FROM [dbo].[users] WHERE adm=@admin AND id=@user_id`);
+    return getAdmin;
+  } catch (error) {
+    return ;
+  }
+}
+
 module.exports = {
   getUsers: getUsers,
   insertUsers: insertUsers,
+  getAdmins: getAdmins
 };

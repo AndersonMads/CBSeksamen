@@ -5,7 +5,7 @@ SELECT *
 FROM today_date
 
 SELECT *
-FROM items
+FROM users
 
 SELECT *
 FROM locations

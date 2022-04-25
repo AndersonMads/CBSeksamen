@@ -62,16 +62,30 @@ app.post('/newItemCreated', function (req, res){
    
 });
 
-//Ser items
+//Ser alle items
 app.get('/showItems', (req, res) => {
     dbOperations.showItems().then(result => {
         res.send(result.recordset)
     });
 });
 
-
+//Ser egne items
 app.get('/showOwnItems', (req, res) => {
     dbOperations.showOwnItems().then(result => {
         res.send(result.recordset)
+    });
+});
+
+//Login admin
+app.post('/loginAdmin', function (req,res) {
+
+    let user_id = JSON.stringify(req.body.admin_id)
+
+    dboperations.getAdmins(user_id).then(result => {
+        if(result.rowsAffected[0] > 0) {
+            res.status(200).send(result.recordset[0].adm)
+        } else {
+            res.status(404).send(false)
+        };
     });
 });
