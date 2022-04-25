@@ -69,9 +69,20 @@ app.get('/showItems', (req, res) => {
     });
 });
 
-
+// Se dine egne varer
 app.get('/showOwnItems', (req, res) => {
+ 
     dbOperations.showOwnItems().then(result => {
         res.send(result.recordset)
+    });
+});
+
+// Slet egne varer
+app.post('/deleteOwnItems', (req,res) => {
+
+    let id = req.body.username
+
+    dbOperations.deleteOwnItems(id).then(result => {
+        res.status(201).json(result)
     });
 });

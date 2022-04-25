@@ -76,6 +76,18 @@ async function showItems() {
   }
 
 
+  async function deleteOwnItems(id) {
+    try {
+      let pool = await sql.connect(config);
+      let deleteOwnItems = pool
+        .request()
+        .input('id', sql.VarChar(255), id)
+        .query(`DELETE FROM items WHERE id=@id`)
+      return deleteOwnItems;
+    } catch (error) {
+      return ;
+    }
+  }
 
 
 
@@ -85,5 +97,6 @@ async function showItems() {
 module.exports = {
     insertItem: insertItem,
     showItems: showItems,
-    showOwnItems: showOwnItems
+    showOwnItems: showOwnItems,
+    deleteOwnItems: deleteOwnItems
 }
