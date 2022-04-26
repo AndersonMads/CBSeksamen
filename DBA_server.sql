@@ -7,10 +7,17 @@ FROM today_date
 SELECT *
 FROM users
 
-SELECT *
-FROM locations
+SELECT u.id, Count(i.id) as number_of_ads
+      FROM users as u
+            INNER JOIN items as i
+                ON i.user_id = u.id
+  GROUP BY u.id
+  ORDER BY number_of_ads DESC
 
-DELETE FROM users WHERE id<39 AND id>24;
+SELECT i.id, i.i_name,i.price,i.date_created,i.reusables,i.follow,c,c_name
+    FROM items as i
+            INNER JOIN categories as c
+                ON c.id = i.category_id
 
 INSERT INTO items(i_name, category_id, price, date_created, user_id, reusables, follow, today_date_id)
 VALUES ('stol',4,300,'2022-04-21',3,1,0,1)
