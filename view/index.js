@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let logoutButton = document.getElementById('logoutButton');
 
     logoutButton.addEventListener('click', function() {
-        localStorage.clear()
+        localStorage.clear();
         location.href = "/login";
     });
 
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <th>Created date</th>
             <th>Location</th>
             <th>Category</th>
-            <th>Reusables</th>
+            <th>For free?</th>
             <th>Username</th>
             <th>Gold</th>
             <th>Follow</th>

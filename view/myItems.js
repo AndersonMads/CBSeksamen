@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Gør det muligt at logge ud ved at fjerne localstorage.
- 
 
     let submitCategory = document.getElementById('submitCategory');
 

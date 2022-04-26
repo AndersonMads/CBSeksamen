@@ -17,8 +17,8 @@ app.listen(PORT,function () {
 });
 
 
-const dboperations = require(__dirname + '/model/users.js')
-const dbOperations = require(__dirname + '/model/items.js')
+const dboperationsUsers = require('./model/users')
+const dboperationsItems = require(__dirname + '/model/items.js')
 
 //Login
 app.post('/login', function (req,res) {
@@ -26,7 +26,7 @@ app.post('/login', function (req,res) {
     let username = req.body.username
     let password = req.body.password
 
-    dboperations.getUsers(username,password).then(result => {
+    dboperationsUsers.getUsers(username,password).then(result => {
         if(result.rowsAffected[0] > 0) {
             res.status(200).json(result.recordset[0].id)
         } else {
@@ -42,7 +42,7 @@ app.post('/new', function (req,res) {
     let password = req.body.password
     let location_id = req.body.region
 
-    dboperations.insertUsers(username,password,location_id).then(result => {
+    dboperationsUsers.insertUsers(username,password,location_id).then(result => {
         res.status(201).json(result)
     })
     console.log(username,password,location_id)
@@ -56,15 +56,15 @@ app.post('/newItemCreated', function (req, res){
     let i_name = req.body.itemName
     let reusables = req.body.reusables
 
-    dbOperations.insertItem(i_name,category,price,user_id,reusables).then(result => {
+    dboperationsItems.insertItem(i_name,category,price,user_id,reusables).then(result => {
         res.status(201).json(result)
     });
    
 });
 
-//Ser items
+//Ser alle items
 app.get('/showItems', (req, res) => {
-    dbOperations.showItems().then(result => {
+    dboperationsItems.showItems().then(result => {
         res.send(result.recordset)
     });
 });
@@ -72,7 +72,7 @@ app.get('/showItems', (req, res) => {
 // Se dine egne varer
 app.get('/showOwnItems', (req, res) => {
  
-    dbOperations.showOwnItems().then(result => {
+    dboperationsItems.showOwnItems().then(result => {
         res.send(result.recordset)
     });
 });
@@ -82,7 +82,7 @@ app.post('/deleteOwnItems', (req,res) => {
 
     let id = req.body.username
 
-    dbOperations.deleteOwnItems(id).then(result => {
+    dboperationsItems.deleteOwnItems(id).then(result => {
         res.status(201).json(result)
     });
 });
@@ -96,7 +96,27 @@ app.post('/updateOwnItems', (req,res) => {
     let category = req.body.category
     let reusable = req.body.reusable
 
-    dbOperations.updateOwnItems(id, itemName, price, category, reusable).then(result => {
+    dboperationsItems.updateOwnItems(id, itemName, price, category, reusable).then(result => {
         res.status(201).json(result)
+    });
+});
+//Login admin
+app.post('/loginAdmin', function (req,res) {
+
+    let user_id = JSON.stringify(req.body.admin_id)
+
+    dboperationsUsers.getAdmins(user_id).then(result => {
+        if(result.rowsAffected[0] > 0) {
+            res.status(200).send(result.recordset[0].adm)
+        } else {
+            res.status(404).send(false)
+        };
+    });
+});
+
+//Ser antal annoncer per bruger
+app.get('/showListofUsers', (req, res) => {
+    dboperationsUsers.showUsers().then(result => {
+        res.send(result.recordset)
     });
 });
