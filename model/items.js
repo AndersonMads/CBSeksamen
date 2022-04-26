@@ -90,6 +90,43 @@ async function showItems() {
   }
 
 
+  async function updateOwnItems(id, i_name, price, category_id, reusables) {
+    if(reusables==1){
+    try {
+      let pool = await sql.connect(config);
+      let updateOwnItems = pool
+        .request()
+        .input('id', sql.VarChar(255), id)
+        .input('i_name', sql.VarChar(255), i_name)
+        .input('price', sql.Decimal, 0)
+        .input('category_id', sql.Int, category_id)
+        .input('reusables', sql.Bit, 1)
+        .query(`UPDATE items
+               SET i_name=@i_name, price=@price, category_id=@category_id, reusables=@reusables
+               WHERE id=@id`)
+      return updateOwnItems;
+    } catch (error) {
+      return ;
+    }  
+    } else {
+      try {
+        let pool = await sql.connect(config);
+        let updateOwnItems = pool
+          .request()
+          .input('id', sql.VarChar(255), id)
+          .input('i_name', sql.VarChar(255), i_name)
+          .input('price', sql.Decimal, price)
+          .input('category_id', sql.Int, category_id)
+          .input('reusables', sql.Bit, 0)
+          .query(`UPDATE items
+                 SET i_name=@i_name, price=@price, category_id=@category_id, reusables=@reusables
+                 WHERE id=@id`)
+        return updateOwnItems;
+      } catch (error) {
+        return ;
+      }  
+    } 
+  }
 
 
 
@@ -98,5 +135,6 @@ module.exports = {
     insertItem: insertItem,
     showItems: showItems,
     showOwnItems: showOwnItems,
-    deleteOwnItems: deleteOwnItems
+    deleteOwnItems: deleteOwnItems,
+    updateOwnItems: updateOwnItems
 }

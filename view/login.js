@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let submitButton = document.getElementById("submit");
 
+  
   submitButton.addEventListener("click", function (e) {
     // preventDefault sikrer at siden ikke opdatere imens form input oplyses
     e.preventDefault();

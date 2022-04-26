@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let logoutButton = document.getElementById('logoutButton');
 
     logoutButton.addEventListener('click', function() {
-        localStorage.removeItem('user_id');
+        localStorage.clear()
         location.href = "/login";
     });
 

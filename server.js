@@ -86,3 +86,17 @@ app.post('/deleteOwnItems', (req,res) => {
         res.status(201).json(result)
     });
 });
+
+// Opdater egne varer
+app.post('/updateOwnItems', (req,res) => {
+
+    let id = req.body.id
+    let itemName = req.body.itemName
+    let price = req.body.price
+    let category = req.body.category
+    let reusable = req.body.reusable
+
+    dbOperations.updateOwnItems(id, itemName, price, category, reusable).then(result => {
+        res.status(201).json(result)
+    });
+});
