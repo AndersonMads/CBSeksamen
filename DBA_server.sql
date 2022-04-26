@@ -7,10 +7,11 @@ FROM today_date
 SELECT *
 FROM users
 
-SELECT u.id, Count(i.id) as number_of_ads
+SELECT u.id, u.username, Count(i.id) as number_of_ads
       FROM users as u
             INNER JOIN items as i
                 ON i.user_id = u.id
+      WHERE u.id=u.username
   GROUP BY u.id
   ORDER BY number_of_ads DESC
 

@@ -1,10 +1,9 @@
 var config = require('../Database/config.json')
 var sql = require('mssql');
 
-
-
-//Laver item
-async function insertItem (i_name,category_id,price,user_id,reusables) {
+class Items {
+  //Laver item
+  async insertItem (i_name,category_id,price,user_id,reusables) {
     //Med if-statement sikres at pris bliver 0, hvis reusables er valgt til - uanset input under pris
     if(reusables==1) {
         try {
@@ -37,9 +36,9 @@ async function insertItem (i_name,category_id,price,user_id,reusables) {
             console.log(error)
         }
     }
-}
+  }
 
-async function showItems() {
+  async showItems() {
     try {
       let pool = await sql.connect(config);
       let showItems = pool
@@ -61,7 +60,7 @@ async function showItems() {
     }
   }
 
-  async function showOwnItems() {
+  async showOwnItems() {
     try {
       let pool = await sql.connect(config);
       let showOwnItems = pool
@@ -76,7 +75,7 @@ async function showItems() {
   }
 
 
-  async function deleteOwnItems(id) {
+  async deleteOwnItems(id) {
     try {
       let pool = await sql.connect(config);
       let deleteOwnItems = pool
@@ -90,7 +89,7 @@ async function showItems() {
   }
 
 
-  async function updateOwnItems(id, i_name, price, category_id, reusables) {
+  async updateOwnItems(id, i_name, price, category_id, reusables) {
     if(reusables==1){
     try {
       let pool = await sql.connect(config);
@@ -102,8 +101,8 @@ async function showItems() {
         .input('category_id', sql.Int, category_id)
         .input('reusables', sql.Bit, 1)
         .query(`UPDATE items
-               SET i_name=@i_name, price=@price, category_id=@category_id, reusables=@reusables
-               WHERE id=@id`)
+              SET i_name=@i_name, price=@price, category_id=@category_id, reusables=@reusables
+              WHERE id=@id`)
       return updateOwnItems;
     } catch (error) {
       return ;
@@ -119,8 +118,8 @@ async function showItems() {
           .input('category_id', sql.Int, category_id)
           .input('reusables', sql.Bit, 0)
           .query(`UPDATE items
-                 SET i_name=@i_name, price=@price, category_id=@category_id, reusables=@reusables
-                 WHERE id=@id`)
+                SET i_name=@i_name, price=@price, category_id=@category_id, reusables=@reusables
+                WHERE id=@id`)
         return updateOwnItems;
       } catch (error) {
         return ;
@@ -128,13 +127,9 @@ async function showItems() {
     } 
   }
 
-
-
-
-module.exports = {
-    insertItem: insertItem,
-    showItems: showItems,
-    showOwnItems: showOwnItems,
-    deleteOwnItems: deleteOwnItems,
-    updateOwnItems: updateOwnItems
 }
+
+
+
+
+module.exports = new Items()

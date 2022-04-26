@@ -18,7 +18,7 @@ app.listen(PORT,function () {
 
 
 const dboperationsUsers = require('./model/users')
-const dboperationsItems = require(__dirname + '/model/items.js')
+const dboperationsItems = require('./model/items')
 
 //Login
 app.post('/login', function (req,res) {
@@ -45,7 +45,6 @@ app.post('/new', function (req,res) {
     dboperationsUsers.insertUsers(username,password,location_id).then(result => {
         res.status(201).json(result)
     })
-    console.log(username,password,location_id)
 });
 
 //Laver item

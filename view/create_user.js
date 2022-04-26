@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 location.href = "/login.html";     
             })
             .catch((error) => {
-                console.log('Error:', error)
+                window.alert("Username already in use")
             })
         });
 });

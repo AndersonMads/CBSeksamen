@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <th>Price</th>
             <th>Created date</th>
             <th>Category</th>
-            <th>Reusables</th>
+            <th>For free?</th>
             <th>Item ID</th>
         </tr>
         `;
