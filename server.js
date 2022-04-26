@@ -82,7 +82,7 @@ app.post('/deleteOwnItems', (req,res) => {
     let id = req.body.username
 
     dboperationsItems.deleteOwnItems(id).then(result => {
-        res.status(201).json(result)
+        res.status(204).json(result)
     });
 });
 
@@ -96,7 +96,7 @@ app.post('/updateOwnItems', (req,res) => {
     let reusable = req.body.reusable
 
     dboperationsItems.updateOwnItems(id, itemName, price, category, reusable).then(result => {
-        res.status(201).json(result)
+        res.status(200).json(result)
     });
 });
 //Login admin
@@ -117,5 +117,15 @@ app.post('/loginAdmin', function (req,res) {
 app.get('/showListofUsers', (req, res) => {
     dboperationsUsers.showUsers().then(result => {
         res.send(result.recordset)
+    });
+});
+
+// Slet egne varer
+app.post('/deleteUserAdmin', (req,res) => {
+
+    let user_id= req.body.user_id
+
+    dboperationsUsers.deleteUserAdmin(user_id).then(result => {
+        res.status(204).json(result)
     });
 });

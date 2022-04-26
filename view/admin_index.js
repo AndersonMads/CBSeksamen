@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       list.innerHTML = `
       <tr>
           <th>User_id</th>
+          <th>Username</th>
           <th>Number of ads</th>
       </tr>
       `;
@@ -32,22 +33,85 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => {
           if (response) {
           //Usorteret liste
-              var showSelectedProducts = '<ul>'
+              var showSelectedUsers = '<ul>'
 
               //Ingen filtre (uden genbrugsvare)
               response.forEach(function(user) {
                   list.innerHTML += `
                   <tr>
-                      <td>${user.id}</td> 
+                      <td>${user.user_id}</td> 
+                      <td>${user.username}</td> 
                       <td>${user.number_of_ads}</td>                              
                   </tr>
                   `;
               });
-              document.getElementById("product").innerHTML = showSelectedProducts;
+              document.getElementById("users").innerHTML = showSelectedUsers;
           };
       })
       .catch((error) => {
           window.alert(error)
       });
   });
+
+
+  //Slet bruger
+  let submitButtonDelete = document.getElementById('submitDelete');
+
+  submitButtonDelete.addEventListener('click', function(e) {
+      // preventDefault sikrer at siden ikke opdatere imens form input oplyses
+      e.preventDefault();
+
+      let user_idInput = document.getElementById('user_id').value;
+
+      let deleteUser = {
+          user_id: user_idInput
+      }
+      
+      //Poster givne oplysninger
+      fetch('http://localhost:3000/deleteUserAdmin', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(deleteUser)
+      })
+      .then(response => {
+          window.alert('User deleted');
+          location.href = "/admin_index.html";   
+      })
+      .catch((error) => {
+          console.log('Error:', error)
+      })
+  });
+
+    //Opdater bruger
+    let submitButtonUpdate = document.getElementById('submitDelete');
+
+    submitButtonUpdate.addEventListener('click', function(e) {
+        // preventDefault sikrer at siden ikke opdatere imens form input oplyses
+        e.preventDefault();
+  
+        let user_idInput = document.getElementById('user_id').value;
+  
+        let deleteUser = {
+            user_id: user_idInput
+        }
+        
+        //Poster givne oplysninger
+        fetch('http://localhost:3000/deleteUserAdmin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(deleteUser)
+        })
+        .then(response => {
+            window.alert('User deleted');
+            location.href = "/admin_index.html";   
+        })
+        .catch((error) => {
+            console.log('Error:', error)
+        })
+    });
+
 });

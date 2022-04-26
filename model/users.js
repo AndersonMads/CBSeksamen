@@ -55,13 +55,33 @@ class User {
       let pool = await sql.connect(config);
       let showUser = pool
         .request()
-        .query(`SELECT u.id, Count(i.id) as number_of_ads
+        .query(`SELECT CONVERT(VARCHAR(255),u.id) as user_id,u.username, Count(i.id) as number_of_ads
         FROM users as u
               INNER JOIN items as i
                   ON i.user_id = u.id
-          GROUP BY u.id
-          ORDER BY number_of_ads DESC`)
+    GROUP BY u.id, u.username
+
+  UNION
+
+  SELECT 'TOTAL','TOTAL', Count(i.id)
+      FROM users as u
+              INNER JOIN items as i
+                  ON i.user_id = u.id`)
       return showUser;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteUserAdmin(user_id) {
+    try {
+      let pool = await sql.connect(config);
+      let deleteUserAdmin = pool
+        .request()
+        .input('user_id', sql.VarChar(255), user_id)
+        .query(`DELETE FROM items WHERE user_id=@user_id
+        DELETE FROM users WHERE id=@user_id`)
+      return deleteUserAdmin;
     } catch (error) {
       console.log(error);
     }

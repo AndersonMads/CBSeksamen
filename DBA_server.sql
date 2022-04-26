@@ -7,13 +7,9 @@ FROM today_date
 SELECT *
 FROM users
 
-SELECT u.id, u.username, Count(i.id) as number_of_ads
-      FROM users as u
-            INNER JOIN items as i
-                ON i.user_id = u.id
-      WHERE u.id=u.username
-  GROUP BY u.id
-  ORDER BY number_of_ads DESC
+DELETE FROM items WHERE user_id=23
+DELETE FROM users WHERE id=23
+
 
 SELECT i.id, i.i_name,i.price,i.date_created,i.reusables,i.follow,c,c_name
     FROM items as i
