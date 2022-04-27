@@ -18,7 +18,8 @@ app.listen(PORT,function () {
 
 
 const dboperationsUsers = require('./model/users')
-const dboperationsItems = require('./model/items')
+const dboperationsItems = require('./model/items');
+const res = require('express/lib/response');
 
 //Login
 app.post('/login', function (req,res) {
@@ -129,7 +130,6 @@ app.post('/deleteUserAdmin', (req,res) => {
         res.status(204).json(result)
     });
 });
-
 
 
 // Slet egen bruger

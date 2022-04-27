@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hideMe[2].style.display = 'none'
                 hideMe[3].style.display = 'none'
                 hideMe[4].style.display = 'none'
+                hideMe[5].style.display = 'none'
                 logoutButton.style.display = 'none'
 
             }
