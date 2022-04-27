@@ -86,6 +86,21 @@ class User {
       console.log(error);
     }
   }
+
+
+  async deleteOwnUser(user_id) {
+    try {
+      let pool = await sql.connect(config);
+      let deleteOwnUser = pool
+        .request()
+        .input('user_id', sql.VarChar(255), user_id)
+        .query(`DELETE FROM users WHERE id=@user_id 
+                  DELETE FROM items WHERE user_id=@user_id`)
+      return deleteOwnUser;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new User()

@@ -1,11 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const h1 = document.querySelector('h1') // Gør det muligt med user_id på frontpage
+    const hideMe = document.getElementsByClassName('hideMe')
+ 
     // Gør det muligt at logge ud ved at fjerne localstorage.
     let logoutButton = document.getElementById('logoutButton');
     logoutButton.addEventListener('click', function() {
         localStorage.clear();
-        location.href = "/login";
+        location.href = "/";
     });
+    
 
+    function navnPåForside() {
+        if(localStorage.getItem('user_id')){
+            let user_id = localStorage.getItem('user_id');
+            h1.textContent = 'Velkommen. Dit user_id er ' + user_id;
+            registerButton.style.display = 'none'
+            } else {
+                h1.textContent = 'Velkommen, log ind eller registrer nedenfor';
+                hideMe[0].style.display = 'none'
+                hideMe[1].style.display = 'none'
+                hideMe[2].style.display = 'none'
+                hideMe[3].style.display = 'none'
+                hideMe[4].style.display = 'none'
+                logoutButton.style.display = 'none'
+
+            }
+        };
 
     let submitCategory = document.getElementById('submitCategory');
 
@@ -152,6 +172,5 @@ document.addEventListener('DOMContentLoaded', function() {
             window.alert(error)
         });
     });
-
+    document.body.onload = navnPåForside()
 });
-

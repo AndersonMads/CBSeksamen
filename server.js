@@ -120,12 +120,24 @@ app.get('/showListofUsers', (req, res) => {
     });
 });
 
-// Slet egne varer
+// Slet user - admin funktionalitet
 app.post('/deleteUserAdmin', (req,res) => {
 
     let user_id= req.body.user_id
 
     dboperationsUsers.deleteUserAdmin(user_id).then(result => {
         res.status(204).json(result)
+    });
+});
+
+
+
+// Slet egen bruger
+app.post('/deleteOwnUser', (req,res) => {
+
+    let user_id = req.body.user_id
+
+    dboperationsUsers.deleteOwnUser(user_id).then(result => {
+        res.status(201).json(result)
     });
 });
