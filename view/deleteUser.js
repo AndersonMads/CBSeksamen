@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded',function () {
            
             let user_idInput = document.getElementById('user_id').value;
             
-            let newUser = {
+            let deletedUser = {
                 user_id: user_idInput,
             }
             if(user_idInput === localStorage.getItem("user_id")){ // Gør at man ikke kan slette andres bruger, men kun den man er logget ind på
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newUser)
+                body: JSON.stringify(deletedUser)
             }).then(response => response.json())
             .then(response => {
                 localStorage.clear()
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded',function () {
             .catch((error) => {
                 console.log('Error:', error)
             })
+                } else {
+                    window.alert('You can only delete your own user')
                 }
         });
 });

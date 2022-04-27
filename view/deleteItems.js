@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded',function () {
 
             let usernameInput = document.getElementById('username').value;
 
-            let newUser = {
+            let deletedItem = {
                 username: usernameInput,
             }
             
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newUser)
+                body: JSON.stringify(deletedItem)
             })
             .then(response => {
                 window.alert('Item deleted');

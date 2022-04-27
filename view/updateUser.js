@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded',function () {
         }
         
         //Poster givne oplysninger
+        if(user_idInput === localStorage.getItem("user_id")){ // Gør at man kun kan opdatere sin egen profil!
         fetch('http://localhost:3000/updateUser', {
             method: 'POST',
             headers: {
@@ -34,5 +35,8 @@ document.addEventListener('DOMContentLoaded',function () {
         .catch((error) => {
             console.log('Error:', error)
         })
+            } else {
+                window.alert('You can only change your own information')
+            } 
     });
 });
