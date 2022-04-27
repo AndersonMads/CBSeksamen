@@ -95,12 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
         let usernameInput = document.getElementById('username').value;
         let passwordInput = document.getElementById('password').value;
         let goldInput = JSON.parse(document.getElementById('gold').value);
+        let regionInput = JSON.parse(document.getElementById('newRegion').value);
   
         let updateUser = {
             user_id: user_idInput,
             newUsername: usernameInput,
             newPassword: passwordInput,
-            gold: goldInput
+            gold: goldInput,
+            newRegion: regionInput
         }
         
         //Poster givne oplysninger

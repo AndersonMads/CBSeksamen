@@ -149,8 +149,25 @@ app.post('/updateUserAdmin', (req,res) => {
     let newUsername = req.body.newUsername
     let newPassword = req.body.newPassword
     let gold = req.body.gold
+    let newRegion = req.body.newRegion
 
-    dboperationsUsers.updateUserAdmin(user_id, newUsername, newPassword, gold).then(result => {
+    dboperationsUsers.updateUserAdmin(user_id, newUsername, newPassword, gold, newRegion).then(result => {
         res.status(204).json(result)
     });
 });
+
+
+// Opdater egen bruger
+app.post('/updateUser', (req,res) => {
+
+    let user_id= req.body.user_id
+    let newUsername = req.body.newUsername
+    let newPassword = req.body.newPassword
+    let newRegion = req.body.newRegion
+
+    dboperationsUsers.updateUser(user_id, newUsername, newPassword, newRegion).then(result => {
+        res.status(204).json(result)
+    });
+});
+
+

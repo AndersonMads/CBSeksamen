@@ -1,33 +1,38 @@
 document.addEventListener('DOMContentLoaded',function () {
 
-    let submitButton = document.getElementById('submit');
+    //Opdater bruger
+    let submitButtonUpdate = document.getElementById('submitUpdate');
 
-        submitButton.addEventListener('click', function(e) {
-            // preventDefault sikrer at siden ikke opdatere imens form input oplyses
-            e.preventDefault();
-           
-            let user_idInput = document.getElementById('user_id').value;
-            
-            let newUser = {
-                user_id: user_idInput,
-            }
-            if(user_idInput === localStorage.getItem("user_id")){ // Gør at man ikke kan slette andres bruger, men kun den man er logget ind på
-            //Poster givne oplysninger
-            fetch('http://localhost:3000/deleteOwnUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUser)
-            }).then(response => response.json())
-            .then(response => {
-                localStorage.clear()
-                window.alert('User deleted');
-                location.href = "/index.html";     
-            })
-            .catch((error) => {
-                console.log('Error:', error)
-            })
-                }
-        });
+    submitButtonUpdate.addEventListener('click', function(e) {
+        // preventDefault sikrer at siden ikke opdatere imens form input oplyses
+        e.preventDefault();
+  
+        let user_idInput = document.getElementById('user_idUpdate').value;
+        let usernameInput = document.getElementById('username').value;
+        let passwordInput = document.getElementById('password').value;
+        let regionInput = JSON.parse(document.getElementById('newRegion').value);
+  
+        let updateUser = {
+            user_id: user_idInput,
+            newUsername: usernameInput,
+            newPassword: passwordInput,
+            newRegion: regionInput
+        }
+        
+        //Poster givne oplysninger
+        fetch('http://localhost:3000/updateUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateUser)
+        })
+        .then(response => {
+            window.alert('User updated');
+            location.href = "/";   
+        })
+        .catch((error) => {
+            console.log('Error:', error)
+        })
+    });
 });

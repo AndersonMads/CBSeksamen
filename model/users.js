@@ -121,6 +121,46 @@ class User {
       console.log(error);
     }
   }
+
+  async updateUserAdmin(user_id, newUsername, newPassword, gold, newRegion) {
+    try {
+      let pool = await sql.connect(config);
+      let updateUserAdmin = pool
+        .request()
+        .input("user_id", sql.VarChar(255), user_id)
+        .input("newUsername", sql.VarChar(255), newUsername)
+        .input("newPassword", sql.VarChar(255), newPassword)
+        .input("gold", sql.Bit, gold)
+        .input("newRegion", sql.Int, newRegion)
+        .query(
+          `UPDATE users SET username=@newUsername, pswd=@newPassword, gold=@gold, location_id=@newRegion WHERE id=@user_id`
+        );
+      return updateUserAdmin;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  async updateUser(user_id, newUsername, newPassword, newRegion) {
+    try {
+      let pool = await sql.connect(config);
+      let updateUserAdmin = pool
+        .request()
+        .input("user_id", sql.VarChar(255), user_id)
+        .input("newUsername", sql.VarChar(255), newUsername)
+        .input("newPassword", sql.VarChar(255), newPassword)
+        .input("newRegion", sql.Int, newRegion)
+        .query(
+          `UPDATE users SET username=@newUsername, pswd=@newPassword, location_id=@newRegion WHERE id=@user_id`
+        );
+      return updateUserAdmin;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 }
 
 module.exports = new User();
