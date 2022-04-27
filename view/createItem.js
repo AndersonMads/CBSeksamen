@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded',function () {
                 body: JSON.stringify(newItem)
             }).then(response => response.json())
             .then(response => {
-                window.alert('Item created');  
+                window.alert('Item created');
+                location.href = "/";     
             })
             .catch((error) => {
                 console.log('Error:', error)

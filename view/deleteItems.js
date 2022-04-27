@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded',function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(newUser)
-            }).then(response => response.json())
+            })
             .then(response => {
                 window.alert('Item deleted');
-                location.href = "/index.html";     
+                location.href = "/myItems.html";     
             })
             .catch((error) => {
                 console.log('Error:', error)

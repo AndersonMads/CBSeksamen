@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded',function () {
                 body: JSON.stringify(newItem)
             }).then(response => response.json())
             .then(() => {
-                window.alert('Item updated');  
+                window.alert('Item updated'); 
+                location.href = "/myItems.html";  
             })
             .catch((error) => {
                 console.log('Error:', error)

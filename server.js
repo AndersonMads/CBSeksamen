@@ -120,12 +120,25 @@ app.get('/showListofUsers', (req, res) => {
     });
 });
 
-// Slet egne varer
+// Slet bruger fra Admin
 app.post('/deleteUserAdmin', (req,res) => {
 
     let user_id= req.body.user_id
 
     dboperationsUsers.deleteUserAdmin(user_id).then(result => {
+        res.status(204).json(result)
+    });
+});
+
+// Opdater bruger fra Admin
+app.post('/updateUserAdmin', (req,res) => {
+
+    let user_id= req.body.user_id
+    let newUsername = req.body.newUsername
+    let newPassword = req.body.newPassword
+    let gold = req.body.gold
+
+    dboperationsUsers.updateUserAdmin(user_id, newUsername, newPassword, gold).then(result => {
         res.status(204).json(result)
     });
 });
