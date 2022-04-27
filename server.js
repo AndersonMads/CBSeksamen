@@ -141,3 +141,16 @@ app.post('/deleteOwnUser', (req,res) => {
         res.status(201).json(result)
     });
 });
+
+// Opdater bruger fra Admin
+app.post('/updateUserAdmin', (req,res) => {
+
+    let user_id= req.body.user_id
+    let newUsername = req.body.newUsername
+    let newPassword = req.body.newPassword
+    let gold = req.body.gold
+
+    dboperationsUsers.updateUserAdmin(user_id, newUsername, newPassword, gold).then(result => {
+        res.status(204).json(result)
+    });
+});
