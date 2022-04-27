@@ -1,7 +1,6 @@
 var config = require("../Database/config.json");
 var sql = require("mssql");
 
-
 class User {
   async getUsers(username, password) {
     try {
@@ -10,13 +9,15 @@ class User {
         .request()
         .input("username", sql.VarChar(255), username)
         .input("pswd", sql.VarChar(255), password)
-        .query(`SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd UPDATE today_date SET date_generated=sysdatetime() WHERE id=1`);
+        .query(
+          `SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd UPDATE today_date SET date_generated=sysdatetime() WHERE id=1`
+        );
       return getUser;
     } catch (error) {
-      return ;
+      return;
     }
   }
-  
+
   async insertUsers(username, password, location_id) {
     try {
       let pool = await sql.connect(config);
@@ -35,7 +36,7 @@ class User {
       console.log(error);
     }
   }
-  
+
   async getAdmins(user_id) {
     try {
       let pool = await sql.connect(config);
@@ -46,18 +47,20 @@ class User {
         .query(`SELECT * FROM [dbo].[users] WHERE adm=@admin AND id=@user_id`);
       return getAdmin;
     } catch (error) {
-      return ;
+      return;
     }
   }
-  
+
+  /* The outer (left) join will return NULL for those persons that do not have an appointment.
+    The aggregate function count() will not count NULL values and thus you'll not get a zero.
+  */
   async showUsers() {
     try {
       let pool = await sql.connect(config);
-      let showUser = pool
-        .request()
+      let showUser = pool.request()
         .query(`SELECT CONVERT(VARCHAR(255),u.id) as user_id,u.username, Count(i.id) as number_of_ads
         FROM users as u
-              INNER JOIN items as i
+          LEFT JOIN items as i
                   ON i.user_id = u.id
     GROUP BY u.id, u.username
 
@@ -66,7 +69,7 @@ class User {
   SELECT 'TOTAL','TOTAL', Count(i.id)
       FROM users as u
               INNER JOIN items as i
-                  ON i.user_id = u.id`)
+                  ON i.user_id = u.id`);
       return showUser;
     } catch (error) {
       console.log(error);
@@ -76,11 +79,9 @@ class User {
   async deleteUserAdmin(user_id) {
     try {
       let pool = await sql.connect(config);
-      let deleteUserAdmin = pool
-        .request()
-        .input('user_id', sql.VarChar(255), user_id)
+      let deleteUserAdmin = pool.request().input("user_id", sql.Int, user_id)
         .query(`DELETE FROM items WHERE user_id=@user_id
-        DELETE FROM users WHERE id=@user_id`)
+        DELETE FROM users WHERE id=@user_id`);
       return deleteUserAdmin;
     } catch (error) {
       console.log(error);
@@ -96,11 +97,30 @@ class User {
         .input('user_id', sql.VarChar(255), user_id)
         .query(`DELETE FROM users WHERE id=@user_id 
                   DELETE FROM items WHERE user_id=@user_id`)
-      return deleteOwnUser;
+      return deleteOwnUser;    
+    } catch (error) {
+        console.log(error);
+    }
+  }
+  
+  //Opdater også adresse!!
+  async updateUserAdmin(user_id, newUsername, newPassword, gold) {
+    try {
+      let pool = await sql.connect(config);
+      let updateUserAdmin = pool
+        .request()
+        .input("user_id", sql.VarChar(255), user_id)
+        .input("newUsername", sql.VarChar(255), newUsername)
+        .input("newPassword", sql.VarChar(255), newPassword)
+        .input("gold", sql.Bit, gold)
+        .query(
+          `UPDATE users SET username=@newUsername, pswd=@newPassword, gold=@gold WHERE id=@user_id`
+        );
+      return updateUserAdmin;
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-module.exports = new User()
+module.exports = new User();

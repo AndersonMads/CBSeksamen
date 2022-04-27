@@ -5,11 +5,23 @@ SELECT *
 FROM today_date
 
 SELECT *
+FROM items
+
+SELECT *
 FROM users
 
-DELETE FROM items WHERE user_id=23
-DELETE FROM users WHERE id=23
+SELECT CONVERT(VARCHAR(255),u.id) as user_id,u.username,Count(i.id) as number_of_ad
+        FROM users as u
+              LEFT JOIN items as i
+                  ON i.user_id = u.id
+    GROUP BY u.id, u.username
 
+  UNION
+
+  SELECT 'TOTAL','TOTAL', Count(i.id)
+      FROM users as u
+              INNER JOIN items as i
+                  ON i.user_id = u.id
 
 SELECT i.id, i.i_name,i.price,i.date_created,i.reusables,i.follow,c,c_name
     FROM items as i

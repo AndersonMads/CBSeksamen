@@ -5,16 +5,11 @@
 </head>
 <body>
 
-    <a href="login.html">
-        <button id="logoutButton">Logout</button>
-    </a> 
-
-    <h1>List of users</h1>
-Contain; <br>
-- Opdaterer bruger <br>
-- Slette bruger <br>
-- Lave bruger til guld <br>
-- Se brugerstatistik herunder antal annoncer pr bruger og total antal annoncer
+<h1>Admin page</h1>
+<a href="login.html">
+    <button id="logoutButton">Logout</button>
+</a> 
+<br>
 <br>
 Show all users and their number of ads
 <br>
@@ -35,16 +30,33 @@ Show all users and their number of ads
         </form> 
         <br>
 
-        <h3>Delete user</h3>
+        <h3>Update user</h3>
     
         <!-- Opdaterer user -->
         <form>
             Write the user_id of the user you want to update
             <br>
-            <input placeholder="example" id="user_id" required>
-            <input placeholder="example" id="user_id" required>
-    
-            <button type="submit" id="submitDelete">Delete</button>
+            User_id
+            <br>
+            <input placeholder="example" id="user_idUpdate" required>
+            <br>
+            New username
+            <br>
+            <input placeholder="new username" id="username" required>
+            <br>
+            New password
+            <br>
+            <input placeholder="new password" id="password" required>
+            <br>
+            Gold status
+            <br>
+            <select name="gold" id="gold">
+                <option value=0>No</option>
+                <option value=1>Yes</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit" id="submitUpdate">Update</button>
         </form> 
         <br>
 
