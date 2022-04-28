@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
             location.href = "/admin_index.html";   
         })
         .catch((error) => {
-            console.log('Error:', error)
+            return window.alert('Error:', error)
         })
     });
 

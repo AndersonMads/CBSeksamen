@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 //Ingen filtre (uden genbrugsvare)
                 response.forEach(function(item) {
-                    if(category === "all" && date_created == "" && price == "" && reusables==0 && location =="all") {
+                    if((category === "all" || category==item.c_name) && (date_created == "" || date_created==item.date_created) && (price == "" || price == item.price) && (reusables==0 || reusables ==item.reusables) && (location =="all" || location==item.region)) {
                         list.innerHTML += `
                         <tr>
                             <td>${item.i_name}</td> 
@@ -80,91 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         </tr>
                         `;
                     }
-
-                    //Filtre på kun dato
-                    else if(category === "all" && date_created == item.date_difference  && price == "" && reusables==0 && location =="all") {
-                        list.innerHTML += `
-                        <tr>
-                            <td>${item.i_name}</td> 
-                            <td>${item.price}</td>       
-                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
-                            <td>${item.region}</td> 
-                            <td>${item.c_name}</td>
-                            <td>${item.reusables}</td>
-                            <td>${item.username}</td>
-                            <td>${item.gold}</td> 
-                            <td>${item.follow}</td>                            
-                        </tr>
-                        `;
-                    } 
-
-                    //Filtrer på kun category
-                    else if (item.c_name === category && date_created == ""  && price == "" && reusables==0 && location =="all") {
-                        list.innerHTML += `
-                        <tr>
-                            <td>${item.i_name}</td> 
-                            <td>${item.price}</td>       
-                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
-                            <td>${item.region}</td> 
-                            <td>${item.c_name}</td>
-                            <td>${item.reusables}</td>
-                            <td>${item.username}</td>
-                            <td>${item.gold}</td> 
-                            <td>${item.follow}</td>                    
-                        </tr>
-                        `;
-                    }
-
-                    //Filtrer på kun pris
-                    else if (category==="all" && date_created == "" && price >= item.price && reusables==0 && location =="all") {
-                        list.innerHTML += `
-                        <tr>
-                            <td>${item.i_name}</td> 
-                            <td>${item.price}</td>       
-                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
-                            <td>${item.region}</td> 
-                            <td>${item.c_name}</td>
-                            <td>${item.reusables}</td>
-                            <td>${item.username}</td>
-                            <td>${item.gold}</td> 
-                            <td>${item.follow}</td>                    
-                        </tr>
-                        `;
-                    }
-
-                    //Filtre på kun reusables
-                    else if(item.reusables==reusables && category === "all" && date_created=="" && price == "" && location =="all") {
-                        list.innerHTML += `
-                        <tr>
-                            <td>${item.i_name}</td> 
-                            <td>${item.price}</td>       
-                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
-                            <td>${item.region}</td> 
-                            <td>${item.c_name}</td>
-                            <td>${item.reusables}</td>
-                            <td>${item.username}</td>
-                            <td>${item.gold}</td> 
-                            <td>${item.follow}</td>                            
-                        </tr>
-                        `;
-                    } 
-
-                    //Filtre på kun location
-                    else if(reusables==0 && category === "all" && date_created=="" && price == "" && item.region==location) {
-                        list.innerHTML += `
-                        <tr>
-                            <td>${item.i_name}</td> 
-                            <td>${item.price}</td>       
-                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
-                            <td>${item.region}</td> 
-                            <td>${item.c_name}</td>
-                            <td>${item.reusables}</td>
-                            <td>${item.username}</td>
-                            <td>${item.gold}</td> 
-                            <td>${item.follow}</td>                            
-                        </tr>
-                        `;
-                    } 
                 });
                 document.getElementById("product").innerHTML = showSelectedProducts;
             };

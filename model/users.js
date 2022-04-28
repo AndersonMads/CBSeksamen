@@ -137,7 +137,7 @@ class User {
         );
       return updateUserAdmin;
     } catch (error) {
-      console.log(error);
+     return console.log(error);
     }
   }
 
