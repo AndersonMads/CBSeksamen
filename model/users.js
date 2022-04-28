@@ -47,7 +47,7 @@ class User {
         .query(`SELECT * FROM [dbo].[users] WHERE adm=@admin AND id=@user_id`);
       return getAdmin;
     } catch (error) {
-      return;
+      return ;
     }
   }
 
@@ -102,7 +102,7 @@ class User {
         console.log(error);
     }
   }
-  
+
   //Opdater også adresse!!
   async updateUserAdmin(user_id, newUsername, newPassword, gold) {
     try {
