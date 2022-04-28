@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     submitCategory.addEventListener('click', function () {
         const category = document.getElementById("category").value;
         const date_created = document.getElementById("date").value;
-        const price = document.getElementById("price").value;
+        const pricemin = document.getElementById("pricemin").value;
+        const pricemax = document.getElementById("pricemax").value;
         const reusables = document.getElementById("reusables").value;
         const location = document.getElementById("location").value;
 
@@ -65,7 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 //Ingen filtre (uden genbrugsvare)
                 response.forEach(function(item) {
-                    if((category === "all" || category==item.c_name) && (date_created == "" || date_created==item.date_created) && (price == "" || price == item.price) && (reusables==0 || reusables ==item.reusables) && (location =="all" || location==item.region)) {
+                    if((category === "all" || category==item.c_name)
+                     && (date_created == "" || date_created==item.date_created)
+                      && ((pricemin == "" && pricemax == "") || (pricemin < item.price && pricemax == "") || (pricemin == "" && pricemax > item.price) || (pricemin < item.price && pricemax > item.price))
+                       && (reusables==0 || reusables ==item.reusables)
+                        && (location =="all" || location==item.region)) {
                         list.innerHTML += `
                         <tr>
                             <td>${item.i_name}</td> 
