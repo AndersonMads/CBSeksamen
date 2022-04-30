@@ -43,7 +43,9 @@ class Items {
       let pool = await sql.connect(config);
       let showItems = pool
         .request()
-        .query(`SELECT i.i_name, i.price, i.reusables, i.follow, i.date_created, c.c_name, u.username, datediff(day,t.date_generated,i.date_created)*(-1) as date_difference, u.gold, l.region
+        .query(`
+        UPDATE today_date SET date_generated=sysdatetime() WHERE id=1
+        SELECT i.i_name, i.price, i.reusables, i.follow, i.date_created, c.c_name, u.username, datediff(day,t.date_generated,i.date_created)*(-1) as date_difference, u.gold, l.region
         FROM items as i
             INNER JOIN categories as c
                 ON c.id = i.category_id
@@ -53,7 +55,8 @@ class Items {
                 ON i.today_date_id = t.id
             INNER JOIN locations as l
                 ON u.location_id = l.id
-                ORDER BY u.gold DESC`)
+                ORDER BY u.gold DESC
+                `)
       return showItems;
     } catch (error) {
       return ;
@@ -65,7 +68,8 @@ class Items {
       let pool = await sql.connect(config);
       let showOwnItems = pool
         .request()
-        .query(`SELECT * from items as i
+        .query(`UPDATE today_date SET date_generated=sysdatetime() WHERE id=1
+        SELECT * from items as i
             INNER JOIN categories as c
                 ON c.id = i.category_id`)
       return showOwnItems;

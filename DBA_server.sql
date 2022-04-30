@@ -8,7 +8,23 @@ SELECT *
 FROM items
 
 SELECT *
-FROM users
+FROM dbo.today_date
+
+UPDATE today_date SET date_generated=sysdatetime() WHERE id=1
+        SELECT i.i_name, i.price, i.reusables, i.follow, i.date_created, c.c_name, u.username, datediff(day,t.date_generated,i.date_created)*(-1) as date_difference, u.gold, l.region
+        FROM items as i
+            INNER JOIN categories as c
+                ON c.id = i.category_id
+            INNER JOIN users as u
+                ON i.user_id = u.id
+            INNER JOIN today_date as t
+                ON i.today_date_id = t.id
+            INNER JOIN locations as l
+                ON u.location_id = l.id
+                ORDER BY u.gold DESC
+
+INSERT INTO users (username, pswd, adm, gold, location_id)
+VALUES ('admin2','123',1,1,3)
 
 SELECT CONVERT(VARCHAR(255),u.id) as user_id,u.username,Count(i.id) as number_of_ad
         FROM users as u

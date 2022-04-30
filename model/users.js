@@ -10,7 +10,7 @@ class User {
         .input("username", sql.VarChar(255), username)
         .input("pswd", sql.VarChar(255), password)
         .query(
-          `SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd UPDATE today_date SET date_generated=sysdatetime() WHERE id=1`
+          `SELECT * FROM [dbo].[users] WHERE username=@username AND pswd=@pswd`
         );
       return getUser;
     } catch (error) {
