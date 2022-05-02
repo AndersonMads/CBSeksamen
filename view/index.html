@@ -1,85 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Homepage</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Velkommen, log ind eller registrer nedenfor</h1>
 
     <!-- Knapper til at navigere rundt til de forskellige endpoints -->
     <a href="admin_login.html">
-        <button>Admin login</button>
+      <button>Admin login</button>
     </a>
     <a href="create_user.html">
-        <button id="registerButton">Register</button>
-    </a> 
+      <button id="registerButton">Register</button>
+    </a>
     <a href="login.html">
-        <button id="loginButton">Login</button>
-    </a> 
+      <button id="loginButton">Login</button>
+    </a>
     <a>
-        <button id="logoutButton">Logout</button>
-    </a> 
+      <button id="logoutButton">Logout</button>
+    </a>
     <a href="createItem.html">
-        <button class="hideMe">Add item</button>
+      <button class="hideMe">Add item</button>
     </a>
     <a href="myItems.html">
-        <button class="hideMe">My item(s)</button>
+      <button class="hideMe">My item(s)</button>
     </a>
     <a href="deleteUser.html">
-        <button class="hideMe">Delete User</button>
+      <button class="hideMe">Delete User</button>
     </a>
     <a href="updateUser.html">
-        <button class="hideMe">Update User</button>
+      <button class="hideMe">Update User</button>
     </a>
 
     <!-- Viser alle brugers items ud fra kategori -->
     <h2>Show all users items</h2>
-<br>
-For free?
-<br>
-<select name="reusables" id="reusables" required>
-    <option value=0>No</option>
-    <option value=1>Yes</option>
-</select>
-<br>
-Choose how many days since created
-<br>
-    <input placeholder="Days since created" type="number" id="date">
-<br>
-Choose category
-<br>
+    <br />
+    For free?
+    <br />
+    <select name="reusables" id="reusables" required>
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+    <br />
+    Choose how many days since created
+    <br />
+    <input placeholder="Days since created" type="number" id="date" />
+    <br />
+    Choose category
+    <br />
     <select name="category" id="category" required>
-    <option value="all">All</option>
-    <option value="Electronics">Electronics</option>
-    <option value="Home">Home</option>
-    <option value="Clothing">Clothing</option>
-    <option value="Bathroom">Bathroom</option>
+      <option value="all">All</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Home">Home</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Bathroom">Bathroom</option>
     </select>
-<br>
-Choose max price
-<br>
-    <input placeholder ="Write min price here" type="number" id="pricemin" name="pricemin" >
-    <input placeholder ="Write max price here" type="number" id="pricemax" name="pricemax" >
-<br>
-Choose location
-<br>
+    <br />
+    Choose max price
+    <br />
+    <input
+      placeholder="Write min price here"
+      type="number"
+      id="pricemin"
+      name="pricemin"
+    />
+    <input
+      placeholder="Write max price here"
+      type="number"
+      id="pricemax"
+      name="pricemax"
+    />
+    <br />
+    Choose location
+    <br />
     <select name="location" id="location" required>
-    <option value="all">All</option>
-    <option value="Hovedstaden">Hovedstaden</option>
-    <option value="Sjaelland">Sjaelland</option>
-    <option value="Nordjylland">Nordjylland</option>
-    <option value="Syddanmark">Syddanmark</option>
-    <option value="Midtjylland">Midtjylland</option>
+      <option value="all">All</option>
+      <option value="Hovedstaden">Hovedstaden</option>
+      <option value="Sjaelland">Sjaelland</option>
+      <option value="Nordjylland">Nordjylland</option>
+      <option value="Syddanmark">Syddanmark</option>
+      <option value="Midtjylland">Midtjylland</option>
     </select>
-<br>
-<br>
+    <br />
+    <br />
     <button type="submit" id="submitCategory">Show listed items</button>
 
-    <div id="product"> </div>
-<br>
-    <table style="background-color: lemonchiffon;" id="list"> </table>
-   
+    <div id="product"></div>
+    <br />
+    <table style="background-color: lemonchiffon" id="list"></table>
+
     <script src="index.js" defer></script>
-</body>
+  </body>
 </html>

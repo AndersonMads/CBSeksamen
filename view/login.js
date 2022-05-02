@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let submitButton = document.getElementById("submit");
 
-  
   submitButton.addEventListener("click", function (e) {
     // preventDefault sikrer at siden ikke opdatere imens form input oplyses
     e.preventDefault();
@@ -18,9 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(loginUser)
+      body: JSON.stringify(loginUser),
     })
       .then((response) => response.json())
       .then((data) => {

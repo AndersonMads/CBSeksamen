@@ -1,80 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Homepage</title>
-</head>
-<body>
-
-<h1>Admin page</h1>
-<a href="login.html">
-    <button id="logoutButton">Logout</button>
-</a> 
-<br>
-<br>
-Show all users and their number of ads
-<br>
+  </head>
+  <body>
+    <h1>Admin page</h1>
+    <a href="login.html">
+      <button id="logoutButton">Logout</button>
+    </a>
+    <br />
+    <br />
+    Show all users and their number of ads
+    <br />
     <button type="submit" id="submitCategory">Show users</button>
 
-    <div id="users"> </div>
-    <table style="background-color: lemonchiffon;" id="list"> </table>
+    <div id="users"></div>
+    <table style="background-color: lemonchiffon" id="list"></table>
 
-        <h3>Delete user</h3>
-    
-        <!-- Delete user -->
-        <form>
-            Write the user_id of the user you want to delete
-            <br>
-            <input placeholder="example" id="user_id" required>
-    
-            <button type="submit" id="submitDelete">Delete</button>
-        </form> 
-        <br>
+    <h3>Delete user</h3>
 
-        <h3>Update user</h3>
-    
-        <!-- Opdaterer user -->
-        <form>
-            Write the user_id of the user you want to update
-            <br>
-            User_id
-            <br>
-            <input placeholder="example" id="user_idUpdate" required>
-            <br>
-            New username
-            <br>
-            <input placeholder="new username" id="username" required>
-            <br>
-            New password
-            <br>
-            <input placeholder="new password" id="password" required>
-            <br>
-            Choose new region
-            <br>
-            <select name="region" id="newRegion">
-                <option value=1>Hovedstaden</option>
-                <option value=2>Sjaelland</option>
-                <option value=3>Syddanmark</option>
-                <option value=4>Midtjylland</option>
-                <option value=5>Nordjylland</option>
-              </select>
-              <br>
-            Gold status
-            <br>
-            <select name="gold" id="gold">
-                <option value=0>No</option>
-                <option value=1>Yes</option>
-            </select>
-            <br>
-            <br>
-            <button type="submit" id="submitUpdate">Update</button>
-        </form> 
-        <br>
+    <!-- Delete user -->
+    <form>
+      Write the user_id of the user you want to delete
+      <br />
+      <input placeholder="example" id="user_id" required />
 
-    <br>
+      <button type="submit" id="submitDelete">Delete</button>
+    </form>
+    <br />
+
+    <h3>Update user</h3>
+
+    <!-- Opdaterer user -->
+    <form>
+      Write the user_id of the user you want to update
+      <br />
+      User_id
+      <br />
+      <input placeholder="example" id="user_idUpdate" required />
+      <br />
+      New username
+      <br />
+      <input placeholder="new username" id="username" required />
+      <br />
+      New password
+      <br />
+      <input placeholder="new password" id="password" required />
+      <br />
+      Choose new region
+      <br />
+      <select name="region" id="newRegion">
+        <option value="1">Hovedstaden</option>
+        <option value="2">Sjaelland</option>
+        <option value="3">Syddanmark</option>
+        <option value="4">Midtjylland</option>
+        <option value="5">Nordjylland</option>
+      </select>
+      <br />
+      Gold status
+      <br />
+      <select name="gold" id="gold">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <br />
+      <br />
+      <button type="submit" id="submitUpdate">Update</button>
+    </form>
+    <br />
+
+    <br />
     Go to homepage <a href="index.html"> here </a>
-    <br>
+    <br />
 
-   
     <script src="admin_index.js" defer></script>
-</body>
+  </body>
 </html>

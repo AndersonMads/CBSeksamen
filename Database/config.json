@@ -1,15 +1,15 @@
 {
-    "server": "dbaerver.database.windows.net",
-    "authentication": {
-        "type": "default",
-        "options": {
-            "userName": "Albert",
-            "password": "CBS2022!"
-        }
-    },
+  "server": "dbaerver.database.windows.net",
+  "authentication": {
+    "type": "default",
     "options": {
-        "encrypt": true,
-        "database": "DBA",
-        "trustServerCertificate": true
+      "userName": "Albert",
+      "password": "CBS2022!"
     }
+  },
+  "options": {
+    "encrypt": true,
+    "database": "DBA",
+    "trustServerCertificate": true
+  }
 }

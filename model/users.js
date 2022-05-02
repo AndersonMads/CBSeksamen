@@ -1,7 +1,10 @@
+//Henter config-filen samt mssql package
 var config = require("../Database/config.json");
 var sql = require("mssql");
 
+//Laver class, så det mulliggør at kunne eksporterer samtlige async constructors
 class User {
+  //
   async getUsers(username, password) {
     try {
       let pool = await sql.connect(config);
@@ -47,7 +50,7 @@ class User {
         .query(`SELECT * FROM [dbo].[users] WHERE adm=@admin AND id=@user_id`);
       return getAdmin;
     } catch (error) {
-      return ;
+      return;
     }
   }
 
@@ -88,18 +91,17 @@ class User {
     }
   }
 
-
   async deleteOwnUser(user_id) {
     try {
       let pool = await sql.connect(config);
       let deleteOwnUser = pool
         .request()
-        .input('user_id', sql.VarChar(255), user_id)
+        .input("user_id", sql.VarChar(255), user_id)
         .query(`DELETE FROM items WHERE user_id=@user_id
-                  DELETE FROM users WHERE id=@user_id`)
-      return deleteOwnUser;    
+                  DELETE FROM users WHERE id=@user_id`);
+      return deleteOwnUser;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
@@ -137,10 +139,9 @@ class User {
         );
       return updateUserAdmin;
     } catch (error) {
-     return console.log(error);
+      return console.log(error);
     }
   }
-
 
   async updateUser(user_id, newUsername, newPassword, newRegion) {
     try {
@@ -159,8 +160,6 @@ class User {
       console.log(error);
     }
   }
-
-
 }
 
 module.exports = new User();
