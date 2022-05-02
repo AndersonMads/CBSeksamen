@@ -1,12 +1,16 @@
 var config = require("../Database/config.json");
 var sql = require("mssql");
 
+//Laver class, så det mulliggør at kunne eksporterer samtlige async constructors
 class Items {
-  //Laver item
+  //Indsætter varer
+  //Async constructor med to argumenter
   async insertItem(i_name, category_id, price, user_id, reusables) {
-    //Med if-statement sikres at pris bliver 0, hvis reusables er valgt til - uanset input under pris
+    //Med if-statement sikres at pris bliver 0, hvis "for free?" er tilvalgt uanset input under pris
     if (reusables == 1) {
       try {
+        //Forbinder til SQL via pool
+        //Indsætter varer i SQL ud fra input
         let pool = await sql.connect(config);
         let insertItem = await pool
           .request()
@@ -21,7 +25,7 @@ class Items {
           );
         return insertItem.recordsets;
       } catch (error) {
-        console.log(error);
+        return console.log(error);
       }
     } else {
       try {
@@ -39,13 +43,18 @@ class Items {
           );
         return insertItem.recordsets;
       } catch (error) {
-        console.log(error);
+        return console.log(error);
       }
     }
   }
 
+  //Viser varer med filtre
+  //Async constructor med to argumenter
   async showItems() {
     try {
+      //Forbinder til SQL via pool
+      //Bruger en masse INNER JOIN, så de normaliserede tabeller kan selectes sammen
+      //Opdaterer datoen på tabel [today_date] hver gang varer vises
       let pool = await sql.connect(config);
       let showItems = pool.request().query(`
         UPDATE today_date SET date_generated=sysdatetime() WHERE id=1
@@ -63,12 +72,17 @@ class Items {
                 `);
       return showItems;
     } catch (error) {
-      return;
+      return console.log(error);
     }
   }
 
+  //Viser egne varer
+  //Async constructor med to argumenter
   async showOwnItems() {
     try {
+      //Forbinder til SQL via pool
+      //Viser varer inklusiv kategori
+      //Opdaterer datoen på tabel [today_date] hver gang varer vises
       let pool = await sql.connect(config);
       let showOwnItems = pool.request()
         .query(`UPDATE today_date SET date_generated=sysdatetime() WHERE id=1
@@ -77,12 +91,16 @@ class Items {
                 ON c.id = i.category_id`);
       return showOwnItems;
     } catch (error) {
-      return;
+      return console.log(error);
     }
   }
 
+  //Sletter brugers egne varer
+  //Async constructor med to argumenter
   async deleteOwnItems(id) {
     try {
+      //Forbinder til SQL via pool
+      //Sletter varer med item_id fra input
       let pool = await sql.connect(config);
       let deleteOwnItems = pool
         .request()
@@ -90,13 +108,18 @@ class Items {
         .query(`DELETE FROM items WHERE id=@id`);
       return deleteOwnItems;
     } catch (error) {
-      return;
+      return console.log(error);
     }
   }
 
+  //Opdaterer egne varer
+  //Async constructor med to argumenter
   async updateOwnItems(id, i_name, price, category_id, reusables) {
+    //Med if-statement sikres at pris bliver 0, hvis "for free?" er tilvalgt uanset input under pris
     if (reusables == 1) {
       try {
+        //Forbinder til SQL via pool
+        //Opdaterer vare ud fra input
         let pool = await sql.connect(config);
         let updateOwnItems = pool
           .request()
@@ -109,7 +132,7 @@ class Items {
               WHERE id=@id`);
         return updateOwnItems;
       } catch (error) {
-        return;
+        return console.log(error);
       }
     } else {
       try {
@@ -125,7 +148,7 @@ class Items {
                 WHERE id=@id`);
         return updateOwnItems;
       } catch (error) {
-        return;
+        return console.log(error);
       }
     }
   }

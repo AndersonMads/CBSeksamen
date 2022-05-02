@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //Sikrer bruger er logget ind
   const loggedIn = localStorage.getItem("user_id");
   if (!loggedIn) {
     location.href = "/login.html";
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let categoryInput = document.getElementById("category_id").value;
     let reusablesInput = document.getElementById("reusables").value;
 
+    //Laver om til objekt
     let newItem = {
       user_id: localStorage.user_id,
       price: priceInput,

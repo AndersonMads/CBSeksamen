@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //Sikrer bruger er logget ind
+  const loggedIn = localStorage.getItem("user_id");
+  if (!loggedIn) {
+    location.href = "/login.html";
+    window.alert("Not logged in");
+  }
+
   //Opdater bruger
   let submitButtonUpdate = document.getElementById("submitUpdate");
 
@@ -11,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let passwordInput = document.getElementById("password").value;
     let regionInput = JSON.parse(document.getElementById("newRegion").value);
 
+    //Laver om til objekt
     let updateUser = {
       user_id: user_idInput,
       newUsername: usernameInput,

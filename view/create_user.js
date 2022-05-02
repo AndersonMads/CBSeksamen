@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let passwordInput = document.getElementById("password").value;
     let regionInput = document.getElementById("region").value;
 
+    //Laver om til objekt
     let newUser = {
       username: usernameInput,
       password: passwordInput,

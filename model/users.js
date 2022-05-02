@@ -4,8 +4,11 @@ var sql = require("mssql");
 
 //Laver class, så det mulliggør at kunne eksporterer samtlige async constructors
 class User {
-  //
+  //Login-system til normale hjemmeside
+  //Async constructor med to argumenter
   async getUsers(username, password) {
+    //Forbinder til SQL via pool
+    //Sammenligner input med database-data
     try {
       let pool = await sql.connect(config);
       let getUser = pool
@@ -17,12 +20,16 @@ class User {
         );
       return getUser;
     } catch (error) {
-      return;
+      return console.log(error);
     }
   }
 
+  //Registrer bruger
+  //Async constructor med argumenter
   async insertUsers(username, password, location_id) {
     try {
+      //Forbinder til SQL via pool
+      //Indsætter input-data til SQL
       let pool = await sql.connect(config);
       let insertUser = await pool
         .request()
@@ -40,8 +47,12 @@ class User {
     }
   }
 
+  //Login-system til admin
+  //Async constructor med to argument
   async getAdmins(user_id) {
     try {
+      //Forbinder til SQL via pool
+      //Sammenligner localstorage med database-data
       let pool = await sql.connect(config);
       let getAdmin = pool
         .request()
@@ -54,11 +65,13 @@ class User {
     }
   }
 
-  /* The outer (left) join will return NULL for those persons that do not have an appointment.
-    The aggregate function count() will not count NULL values and thus you'll not get a zero.
-  */
+  //Async constructor uden argument
   async showUsers() {
     try {
+      //Forbinder til SQL via pool
+      //Joiner diverse tabeller blandt andet [users] med [items] med LEFT JOIN, således at users med 0 ads også bliver vist
+      //Tæller antallet af ads og gruppere omkring id og username
+      //Bruger UNION til at tilføje en række ved indeholdende TOTAL
       let pool = await sql.connect(config);
       let showUser = pool.request()
         .query(`SELECT CONVERT(VARCHAR(255),u.id) as user_id,u.username, Count(i.id) as number_of_ads
@@ -75,12 +88,15 @@ class User {
                   ON i.user_id = u.id`);
       return showUser;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
     }
   }
 
+  //Admin kan delete en user
+  //Async constructor med argument
   async deleteUserAdmin(user_id) {
     try {
+      //
       let pool = await sql.connect(config);
       let deleteUserAdmin = pool.request().input("user_id", sql.Int, user_id)
         .query(`DELETE FROM items WHERE user_id=@user_id
@@ -90,9 +106,11 @@ class User {
       console.log(error);
     }
   }
-
+  //Async constructor med to argumenter
   async deleteOwnUser(user_id) {
     try {
+      //Forbinder til SQL via pool
+      //Fjerne brugere og varer, hvis bruger_id er lig med input
       let pool = await sql.connect(config);
       let deleteOwnUser = pool
         .request()
@@ -101,31 +119,16 @@ class User {
                   DELETE FROM users WHERE id=@user_id`);
       return deleteOwnUser;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
     }
   }
 
-  //Opdater også adresse!!
-  async updateUserAdmin(user_id, newUsername, newPassword, gold) {
-    try {
-      let pool = await sql.connect(config);
-      let updateUserAdmin = pool
-        .request()
-        .input("user_id", sql.VarChar(255), user_id)
-        .input("newUsername", sql.VarChar(255), newUsername)
-        .input("newPassword", sql.VarChar(255), newPassword)
-        .input("gold", sql.Bit, gold)
-        .query(
-          `UPDATE users SET username=@newUsername, pswd=@newPassword, gold=@gold WHERE id=@user_id`
-        );
-      return updateUserAdmin;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+  //Admin kan opdaterer brugeroplysninger
+  //Async constructor med argumenter
   async updateUserAdmin(user_id, newUsername, newPassword, gold, newRegion) {
     try {
+      //Forbinder til SQL via pool
+      //Opdaterer valgte values i SQL med input ud fra user_id
       let pool = await sql.connect(config);
       let updateUserAdmin = pool
         .request()
@@ -143,8 +146,12 @@ class User {
     }
   }
 
+  //Bruger kan opdaterer egne oplysninger
+  //Async constructor med argumenter
   async updateUser(user_id, newUsername, newPassword, newRegion) {
     try {
+      //Forbinder til SQL via pool
+      //Opdaterer valgte values i SQL med input ud fra user_id
       let pool = await sql.connect(config);
       let updateUserAdmin = pool
         .request()
@@ -162,4 +169,5 @@ class User {
   }
 }
 
+//Eksporterer klassen
 module.exports = new User();

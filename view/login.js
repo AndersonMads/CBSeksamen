@@ -8,12 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let usernameInput = document.getElementById("username").value;
     let passwordInput = document.getElementById("password").value;
 
+    //Laver om til objekt
     let loginUser = {
       username: usernameInput,
       password: passwordInput,
     };
 
-    //Poster givne oplysninger
+    //Poster givne oplysninger og indsætter bruger_id i localstorage
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {

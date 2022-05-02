@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //Sikrer at man har adgang til admin
   const localstorageAdmin = localStorage.admin;
   if (!localstorageAdmin) {
     location.href = "/";
@@ -7,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let logoutButton = document.getElementById("logoutButton");
 
+  //Logger admin/bruger ud
   logoutButton.addEventListener("click", function () {
     localStorage.clear();
     location.href = "/login";
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
           //Usorteret liste
           var showSelectedUsers = "<ul>";
 
-          //Ingen filtre (uden genbrugsvare)
+          //Indsætter kolonner med values fra SQL
           response.forEach(function (user) {
             list.innerHTML += `
                   <tr>
@@ -61,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let user_idInput = document.getElementById("user_id").value;
 
+    //Laver om til objekt
     let deleteUser = {
       user_id: user_idInput,
     };
@@ -95,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let goldInput = JSON.parse(document.getElementById("gold").value);
     let regionInput = JSON.parse(document.getElementById("newRegion").value);
 
+    //Laver om til objekt
     let updateUser = {
       user_id: user_idInput,
       newUsername: usernameInput,

@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //Sikrer bruger er logget ind
+  const loggedIn = localStorage.getItem("user_id");
+  if (!loggedIn) {
+    location.href = "/login.html";
+    window.alert("Not logged in");
+  }
+
   let submitCategory = document.getElementById("submitCategory");
 
   submitCategory.addEventListener("click", function () {

@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //Sikrer bruger er logget ind
+  const loggedIn = localStorage.getItem("user_id");
+  if (!loggedIn) {
+    location.href = "/login.html";
+    window.alert("Not logged in");
+  }
+
   let submitButton = document.getElementById("submit");
 
   submitButton.addEventListener("click", function (e) {
@@ -7,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let user_idInput = document.getElementById("user_id").value;
 
+    //Laver om til objekt
     let deletedUser = {
       user_id: user_idInput,
     };

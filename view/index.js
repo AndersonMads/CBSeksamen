@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const h1 = document.querySelector("h1"); // Gør det muligt med user_id på frontpage
+  // Gør det muligt med user_id på frontpage
+  const h1 = document.querySelector("h1");
   const hideMe = document.getElementsByClassName("hideMe");
 
   // Gør det muligt at logge ud ved at fjerne localstorage.
@@ -9,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     location.href = "/";
   });
 
+  //Med if-statement enten vises navigatører mellem endpoints samt bruger_id
   function navnPåForside() {
     if (localStorage.getItem("user_id")) {
       let user_id = localStorage.getItem("user_id");
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
           //Usorteret liste
           var showSelectedProducts = "<ul>";
 
-          //Filtre
+          //If-statement muliggør altid at filtrer på "for free?" samt evt filtre bruger ønsker
           response.forEach(function (item) {
             if (
               ((category === "all" && item.reusables == reusables) ||
