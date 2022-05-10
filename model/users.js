@@ -51,9 +51,8 @@ class User {
     }
   }
 
-  /* The outer (left) join will return NULL for those persons that do not have an appointment.
-    The aggregate function count() will not count NULL values and thus you'll not get a zero.
-  */
+  //Viser antal ads pr bruger og total antal ads
+  //Async constructor uden argument
   async showUsers() {
     try {
       let pool = await sql.connect(config);
@@ -88,7 +87,8 @@ class User {
     }
   }
 
-
+  //Bruger kan slette egen profil
+  //Async constructor med to argumenter
   async deleteOwnUser(user_id) {
     try {
       let pool = await sql.connect(config);
@@ -163,4 +163,5 @@ class User {
 
 }
 
+//Eksporterer klassen
 module.exports = new User();

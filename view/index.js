@@ -63,10 +63,27 @@ document.addEventListener('DOMContentLoaded', function() {
             //Usorteret liste
                 var showSelectedProducts = '<ul>'
 
-                //Ingen filtre (uden genbrugsvare)
-                response.forEach(function(item) {
-                    if(category === "all" && date_created == "" && price == "" && reusables==0 && location =="all") {
-                        list.innerHTML += `
+          //If-statement muliggør altid at filtrer på "for free?" samt evt filtre bruger ønsker
+          response.forEach(function (item) {
+            if (
+              ((category === "all" && item.reusables == reusables) ||
+                (category == item.c_name && item.reusables == reusables)) &&
+              ((date_created == "" && item.reusables == reusables) ||
+                (date_created == item.date_difference &&
+                  item.reusables == reusables)) &&
+              ((pricemin == "" && pricemax == "" && item.reusables == reusables) ||
+                (pricemin < item.price && pricemax == "" && item.reusables == reusables) ||
+                (pricemin == "" &&
+                  pricemax > item.price &&
+                  item.reusables == reusables) ||
+                (pricemin < item.price &&
+                  pricemax > item.price &&
+                  item.reusables == reusables)) &&
+              (reusables == 0 || reusables == item.reusables) &&
+              ((location == "all" && item.reusables == reusables) ||
+                (location == item.region && item.reusables == reusables))
+            ) {
+              list.innerHTML += `
                         <tr>
                             <td>${item.i_name}</td> 
                             <td>${item.price}</td>       

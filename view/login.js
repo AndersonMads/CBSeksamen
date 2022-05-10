@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const loggedIn = localStorage.getItem("user_id")
+  if(loggedIn) {
+    location.href = "/";
+  }
+
   let submitButton = document.getElementById("submit");
 
   

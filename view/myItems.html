@@ -11,11 +11,68 @@
 <br>
     <button type="submit" id="submitCategory">Show own items</button>
 
+<<<<<<< Updated upstream
     <div id="product"> </div>
 <br>
     <table style="background-color: lemonchiffon;" id="list"> </table>
     
     <br>
+=======
+    <div id="product"></div>
+    <br />
+    <table style="background-color: lemonchiffon" id="list"></table>
+
+    <br />
+    <!-- Delete items -->
+    <h3>Delete item</h3>
+    <br />
+    <form>
+      Chose the ID of the item you want to delete
+      <br />
+      <input placeholder="example" id="item_id" required />
+
+      <button type="submit" id="submit">Delete</button>
+    </form>
+
+    <br />
+    <h3>Update item</h3>
+
+    <!-- Opdater vare -->
+    <form>
+      Which ITEM ID do you want to change?
+      <br />
+      <input placeholder="120" id="id" type="number" required />
+      <br />
+      Choose category
+      <br />
+      <select name="category" id="category_id" required>
+        <option value="1">Electronics</option>
+        <option value="2">Home</option>
+        <option value="3">Clothing</option>
+        <option value="4">Bathroom</option>
+        <option value="5">Sporting goods</option>
+      </select>
+      <br />
+      Select desired price
+      <br />
+      <input placeholder="500" id="price" type="number" required />
+      <br />
+      Item name
+      <br />
+      <input placeholder="Television" id="i_name" required />
+      <br />
+      Reusables?
+      <br />
+      <select name="reusables" id="reusables" required>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <br />
+      <br />
+      <button type="submit" id="submitUpdate">Update</button>
+    </form>
+    <br />
+>>>>>>> Stashed changes
     Go to homepage <a href="index.html"> here </a>
     <br>
    
