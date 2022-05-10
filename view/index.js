@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
           //Usorteret liste
           var showSelectedProducts = "<ul>";
 
+            //Usorteret liste
+                var showSelectedProducts = '<ul>'
+
           //If-statement muliggør altid at filtrer på "for free?" samt evt filtre bruger ønsker
           response.forEach(function (item) {
             if (
@@ -71,12 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
               ((date_created == "" && item.reusables == reusables) ||
                 (date_created == item.date_difference &&
                   item.reusables == reusables)) &&
-              ((pricemin == "" &&
-                pricemax == "" &&
-                item.reusables == reusables) ||
-                (pricemin < item.price &&
-                  pricemax == "" &&
-                  item.reusables == reusables) ||
+              ((pricemin == "" && pricemax == "" && item.reusables == reusables) ||
+                (pricemin < item.price && pricemax == "" && item.reusables == reusables) ||
                 (pricemin == "" &&
                   pricemax > item.price &&
                   item.reusables == reusables) ||

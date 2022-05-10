@@ -56,16 +56,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
+
+  //Slet egne varer
   let submitButton = document.getElementById("submit");
 
   submitButton.addEventListener("click", function (e) {
     // preventDefault sikrer at siden ikke opdatere imens form input oplyses
     e.preventDefault();
 
-    let usernameInput = document.getElementById("username").value;
+    let item_idInput = document.getElementById("item_id").value;
 
     let deletedItem = {
-      username: usernameInput,
+      item_id: item_idInput,
     };
 
     //Poster givne oplysninger
@@ -85,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
+  //Opdaterer egne varer
   let submitButtonUpdate = document.getElementById("submitUpdate");
 
   submitButtonUpdate.addEventListener("click", function (e) {
@@ -95,14 +98,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let itemNameInput = document.getElementById("i_name").value;
     let categoryInput = document.getElementById("category_id").value;
     let reusablesInput = document.getElementById("reusables").value;
-    let itemId = document.getElementById("id").value;
+    let item_idInput = document.getElementById("id").value;
 
     let newItem = {
       itemName: itemNameInput,
-      id: itemId,
+      item_id: item_idInput,
       price: priceInput,
-      category: categoryInput,
-      reusable: reusablesInput,
+      category_id: categoryInput,
+      reusables: reusablesInput,
     };
 
     //Poster givne oplysninger

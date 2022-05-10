@@ -1,10 +1,10 @@
 var config = require("../Database/config.json");
 var sql = require("mssql");
 
-//Laver class, så det mulliggør at kunne eksporterer samtlige async constructors
+//Laver class, så det mulliggør at kunne eksporterer samtlige async funktioner
 class Items {
   //Indsætter varer
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async insertItem(i_name, category_id, price, user_id, reusables) {
     //Med if-statement sikres at pris bliver 0, hvis "for free?" er tilvalgt uanset input under pris
     if (reusables == 1) {
@@ -49,7 +49,7 @@ class Items {
   }
 
   //Viser varer med filtre
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async showItems() {
     try {
       //Forbinder til SQL via pool
@@ -77,7 +77,7 @@ class Items {
   }
 
   //Viser egne varer
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async showOwnItems() {
     try {
       //Forbinder til SQL via pool
@@ -96,7 +96,7 @@ class Items {
   }
 
   //Sletter brugers egne varer
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async deleteOwnItems(id) {
     try {
       //Forbinder til SQL via pool
@@ -113,7 +113,7 @@ class Items {
   }
 
   //Opdaterer egne varer
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async updateOwnItems(id, i_name, price, category_id, reusables) {
     //Med if-statement sikres at pris bliver 0, hvis "for free?" er tilvalgt uanset input under pris
     if (reusables == 1) {

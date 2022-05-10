@@ -2,10 +2,10 @@
 var config = require("../Database/config.json");
 var sql = require("mssql");
 
-//Laver class, så det mulliggør at kunne eksporterer samtlige async constructors
+//Laver class, så det mulliggør at kunne eksporterer samtlige async funktioner
 class User {
   //Login-system til normale hjemmeside
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async getUsers(username, password) {
     //Forbinder til SQL via pool
     //Sammenligner input med database-data
@@ -25,7 +25,7 @@ class User {
   }
 
   //Registrer bruger
-  //Async constructor med argumenter
+  //Async funktion med argumenter
   async insertUsers(username, password, location_id) {
     try {
       //Forbinder til SQL via pool
@@ -48,7 +48,7 @@ class User {
   }
 
   //Login-system til admin
-  //Async constructor med to argument
+  //Async funktion med to argumenter
   async getAdmins(user_id) {
     try {
       //Forbinder til SQL via pool
@@ -65,7 +65,7 @@ class User {
     }
   }
 
-  //Async constructor uden argument
+  //Async funktion uden argument
   async showUsers() {
     try {
       //Forbinder til SQL via pool
@@ -93,7 +93,7 @@ class User {
   }
 
   //Admin kan delete en user
-  //Async constructor med argument
+  //Async funktion med argument
   async deleteUserAdmin(user_id) {
     try {
       //
@@ -106,7 +106,9 @@ class User {
       console.log(error);
     }
   }
-  //Async constructor med to argumenter
+
+  //Bruger kan slette egen profil
+  //Async funktion med to argumenter
   async deleteOwnUser(user_id) {
     try {
       //Forbinder til SQL via pool
@@ -124,7 +126,7 @@ class User {
   }
 
   //Admin kan opdaterer brugeroplysninger
-  //Async constructor med argumenter
+  //Async funktion med argumenter
   async updateUserAdmin(user_id, newUsername, newPassword, gold, newRegion) {
     try {
       //Forbinder til SQL via pool
@@ -147,7 +149,7 @@ class User {
   }
 
   //Bruger kan opdaterer egne oplysninger
-  //Async constructor med argumenter
+  //Async funktion med argumenter
   async updateUser(user_id, newUsername, newPassword, newRegion) {
     try {
       //Forbinder til SQL via pool
