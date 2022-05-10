@@ -1,7 +1,10 @@
 var config = require("../Database/config.json");
 var sql = require("mssql");
 
+//Laver class, så det mulliggør at kunne eksporterer samtlige async funktioner
 class User {
+  //Login-system til normale hjemmeside
+  //Async funktion med to argumenter
   async getUsers(username, password) {
     try {
       let pool = await sql.connect(config);
@@ -18,6 +21,8 @@ class User {
     }
   }
 
+  //Registrer bruger
+  //Async funktion med argumenter
   async insertUsers(username, password, location_id) {
     try {
       let pool = await sql.connect(config);
@@ -37,6 +42,8 @@ class User {
     }
   }
 
+  //Login-system til admin
+  //Async funktion med to argumenter
   async getAdmins(user_id) {
     try {
       let pool = await sql.connect(config);
@@ -51,8 +58,7 @@ class User {
     }
   }
 
-  //Viser antal ads pr bruger og total antal ads
-  //Async constructor uden argument
+  //Async funktion uden argument
   async showUsers() {
     try {
       let pool = await sql.connect(config);
@@ -75,6 +81,8 @@ class User {
     }
   }
 
+  //Admin kan delete en user
+  //Async funktion med argument
   async deleteUserAdmin(user_id) {
     try {
       let pool = await sql.connect(config);
@@ -88,7 +96,7 @@ class User {
   }
 
   //Bruger kan slette egen profil
-  //Async constructor med to argumenter
+  //Async funktion med to argumenter
   async deleteOwnUser(user_id) {
     try {
       let pool = await sql.connect(config);
@@ -122,6 +130,8 @@ class User {
     }
   }
 
+  //Admin kan opdaterer brugeroplysninger
+  //Async funktion med argumenter
   async updateUserAdmin(user_id, newUsername, newPassword, gold, newRegion) {
     try {
       let pool = await sql.connect(config);
@@ -141,7 +151,8 @@ class User {
     }
   }
 
-
+  //Bruger kan opdaterer egne oplysninger
+  //Async funktion med argumenter
   async updateUser(user_id, newUsername, newPassword, newRegion) {
     try {
       let pool = await sql.connect(config);

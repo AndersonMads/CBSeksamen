@@ -1,25 +1,32 @@
 var config = require('../Database/config.json')
 var sql = require('mssql');
 
+//Laver class, så det mulliggør at kunne eksporterer samtlige async funktioner
 class Items {
-  //Laver item
-  async insertItem (i_name,category_id,price,user_id,reusables) {
-    //Med if-statement sikres at pris bliver 0, hvis reusables er valgt til - uanset input under pris
-    if(reusables==1) {
-        try {
-            let pool = await sql.connect(config);
-            let insertItem = await pool.request()
-                .input('i_name', sql.VarChar(255), i_name)
-                .input('category_id', sql.Int, category_id)
-                .input('price', sql.Decimal, 0)
-                .input('user_id', sql.Int, user_id)
-                .input('reusables', sql.Bit, 1)
-                .input('follow', sql.Bit, 0)
-                .query(`INSERT INTO [dbo].[items](i_name,category_id,price,user_id,reusables,follow) VALUES (@i_name,@category_id,@price,@user_id,@reusables,@follow)`)
-            return insertItem.recordsets;
-        } catch (error) {
-            console.log(error)
-        }
+  //Indsætter varer
+  //Async funktion med to argumenter
+  async insertItem(i_name, category_id, price, user_id, reusables) {
+    //Med if-statement sikres at pris bliver 0, hvis "for free?" er tilvalgt uanset input under pris
+    if (reusables == 1) {
+      try {
+        //Forbinder til SQL via pool
+        //Indsætter varer i SQL ud fra input
+        let pool = await sql.connect(config);
+        let insertItem = await pool
+          .request()
+          .input("i_name", sql.VarChar(255), i_name)
+          .input("category_id", sql.Int, category_id)
+          .input("price", sql.Decimal, 0)
+          .input("user_id", sql.Int, user_id)
+          .input("reusables", sql.Bit, 1)
+          .input("follow", sql.Bit, 0)
+          .query(
+            `INSERT INTO [dbo].[items](i_name,category_id,price,user_id,reusables,follow) VALUES (@i_name,@category_id,@price,@user_id,@reusables,@follow)`
+          );
+        return insertItem.recordsets;
+      } catch (error) {
+        return console.log(error);
+      }
     } else {
         try {
             let pool = await sql.connect(config);
@@ -38,6 +45,8 @@ class Items {
     }
   }
 
+  //Viser varer med filtre
+  //Async funktion med to argumenter
   async showItems() {
     try {
       let pool = await sql.connect(config);
@@ -60,6 +69,8 @@ class Items {
     }
   }
 
+  //Viser egne varer
+  //Async funktion med to argumenter
   async showOwnItems() {
     try {
       let pool = await sql.connect(config);
@@ -74,7 +85,8 @@ class Items {
     }
   }
 
-
+  //Sletter brugers egne varer
+  //Async funktion med to argumenter
   async deleteOwnItems(id) {
     try {
       let pool = await sql.connect(config);
@@ -88,7 +100,8 @@ class Items {
     }
   }
 
-
+  //Opdaterer egne varer
+  //Async funktion med to argumenter
   async updateOwnItems(id, i_name, price, category_id, reusables) {
     if(reusables==1){
     try {
