@@ -170,4 +170,4 @@ app.post('/updateUser', (req,res) => {
     });
 });
 
-
+module.exports = app;
