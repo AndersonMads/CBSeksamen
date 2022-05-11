@@ -38,9 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <tr>
                             <td>${item.i_name}</td> 
                             <td>${item.price}</td>       
-                            <td>${new Date(
-                              item.date_created
-                            ).toLocaleDateString()}</td>
+                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
                             <td>${item.c_name}</td>
                             <td>${item.reusables}</td>    
                             <td>${item.id[0]}</td>                      

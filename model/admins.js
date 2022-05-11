@@ -66,7 +66,7 @@ class Admin {
 
     //Admin kan opdaterer brugeroplysninger
   //Async funktion med argumenter
-  async updateUserAdmin(user_id, newUsername, newPassword, gold, newRegion) {
+  async updateUserAdmin(user_id, username, password, gold, location_id) {
     try {
       //Forbinder til SQL via pool
       //Opdaterer valgte values i SQL med input ud fra user_id
@@ -74,10 +74,10 @@ class Admin {
       let updateUserAdmin = pool
         .request()
         .input("user_id", sql.VarChar(255), user_id)
-        .input("newUsername", sql.VarChar(255), newUsername)
-        .input("newPassword", sql.VarChar(255), newPassword)
+        .input("newUsername", sql.VarChar(255), username)
+        .input("newPassword", sql.VarChar(255), password)
         .input("gold", sql.Bit, gold)
-        .input("newRegion", sql.Int, newRegion)
+        .input("newRegion", sql.Int, location_id)
         .query(
           `UPDATE users SET username=@newUsername, pswd=@newPassword, gold=@gold, location_id=@newRegion WHERE id=@user_id`
         );

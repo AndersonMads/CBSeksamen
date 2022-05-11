@@ -67,21 +67,21 @@ class User {
 
   //Bruger kan opdaterer egne oplysninger
   //Async funktion med argumenter
-  async updateUser(user_id, newUsername, newPassword, newRegion) {
+  async updateUser(user_id, username, password, location_id) {
     try {
       //Forbinder til SQL via pool
       //Opdaterer valgte values i SQL med input ud fra user_id
       let pool = await sql.connect(config);
-      let updateUserAdmin = pool
+      let updateUser = pool
         .request()
         .input("user_id", sql.VarChar(255), user_id)
-        .input("newUsername", sql.VarChar(255), newUsername)
-        .input("newPassword", sql.VarChar(255), newPassword)
-        .input("newRegion", sql.Int, newRegion)
+        .input("newUsername", sql.VarChar(255), username)
+        .input("newPassword", sql.VarChar(255), password)
+        .input("newRegion", sql.Int, location_id)
         .query(
           `UPDATE users SET username=@newUsername, pswd=@newPassword, location_id=@newRegion WHERE id=@user_id`
         );
-      return updateUserAdmin;
+      return updateUser;
     } catch (error) {
       console.log(error);
     }

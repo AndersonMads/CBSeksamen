@@ -26,7 +26,7 @@ const itemTemplate = require("./model/itemTemplate");
 //Login
 app.post("/login", function (req, res) {
   //Henter input til skabelon
-  let user = new userTemplate(undefined,req.body.username,req.body.password,undefined,undefined,undefined,undefined,undefined,undefined)
+  let user = new userTemplate(undefined,req.body.username,req.body.password)
 
   //Indsætter input i SQL-constructor og tjekker om login virker
   dboperationsUsers.getUsers(user.username,user.password).then((result) => {
@@ -41,7 +41,7 @@ app.post("/login", function (req, res) {
 //Registrer bruger
 app.post("/new", function (req, res) {
     //Henter input til skabelon
-    let user = new userTemplate(undefined,req.body.username,req.body.password,undefined,undefined,undefined,undefined,req.body.region,undefined)
+    let user = new userTemplate(undefined,req.body.username,req.body.password,undefined,undefined,undefined,req.body.region)
 
   //Indsætter input i SQL
   dboperationsUsers.insertUsers(user.username, user.password, user.location_id).then((result) => {
@@ -147,10 +147,10 @@ app.post("/deleteOwnUser", (req, res) => {
 // Opdater bruger fra Admin
 app.post("/updateUserAdmin", (req, res) => {
   //Henter input til skabelon
-  let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,req.body.gold,undefined,undefined,undefined,req.body.newRegion)
+  let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,req.body.gold,undefined,req.body.newRegion)
 
   //Indsætter input i SQL-funktion
-  dboperationsAdmins.updateUserAdmin(user.user_id, user.username, user.password, user.gold, user.location).then((result) => {
+  dboperationsAdmins.updateUserAdmin(user.user_id, user.username, user.password, user.gold, user.location_id).then((result) => {
       res.status(204).json(result);
     });
 });
@@ -158,10 +158,10 @@ app.post("/updateUserAdmin", (req, res) => {
 // Opdater egen bruger
 app.post("/updateUser", (req, res) => {
   //Henter input til skabelon
-  let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,undefined,undefined,undefined,undefined,req.body.newRegion)
+  let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,undefined,undefined,req.body.newRegion)
 
   //Indsætter input i SQL-funktion
-  dboperationsUsers.updateUser(user.user_id, user.username, user.password, user.location).then((result) => {
+  dboperationsUsers.updateUser(user.user_id, user.username, user.password, user.location_id).then((result) => {
       res.status(204).json(result);
     });
 });

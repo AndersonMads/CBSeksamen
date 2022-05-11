@@ -97,14 +97,14 @@ class Items {
 
   //Sletter brugers egne varer
   //Async funktion med to argumenter
-  async deleteOwnItems(id) {
+  async deleteOwnItems(item_id) {
     try {
       //Forbinder til SQL via pool
       //Sletter varer med item_id fra input
       let pool = await sql.connect(config);
       let deleteOwnItems = pool
         .request()
-        .input("id", sql.VarChar(255), id)
+        .input("id", sql.VarChar(255), item_id)
         .query(`DELETE FROM items WHERE id=@id`);
       return deleteOwnItems;
     } catch (error) {
@@ -114,7 +114,7 @@ class Items {
 
   //Opdaterer egne varer
   //Async funktion med to argumenter
-  async updateOwnItems(id, i_name, price, category_id, reusables) {
+  async updateOwnItems(item_id, i_name, price, category_id, reusables) {
     //Med if-statement sikres at pris bliver 0, hvis "for free?" er tilvalgt uanset input under pris
     if (reusables == 1) {
       try {
@@ -123,7 +123,7 @@ class Items {
         let pool = await sql.connect(config);
         let updateOwnItems = pool
           .request()
-          .input("id", sql.VarChar(255), id)
+          .input("id", sql.VarChar(255), item_id)
           .input("i_name", sql.VarChar(255), i_name)
           .input("price", sql.Decimal, 0)
           .input("category_id", sql.Int, category_id)
