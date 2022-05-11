@@ -25,10 +25,10 @@ const itemTemplate = require("./model/itemTemplate");
 
 //Login
 app.post("/login", function (req, res) {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let user = new userTemplate(undefined,req.body.username,req.body.password)
 
-  //Indsætter input i SQL-constructor og tjekker om login virker
+  //Indsætter input fra objekt og tjekker om login virker
   dboperationsUsers.getUsers(user.username,user.password).then((result) => {
     if (result.rowsAffected[0] > 0) {
       res.status(200).json(result.recordset[0].id);
@@ -40,7 +40,7 @@ app.post("/login", function (req, res) {
 
 //Registrer bruger
 app.post("/new", function (req, res) {
-    //Henter input til skabelon
+    //Indsætter input i class så det bliver til objekt
     let user = new userTemplate(undefined,req.body.username,req.body.password,undefined,undefined,undefined,req.body.region)
 
   //Indsætter input i SQL
@@ -51,7 +51,7 @@ app.post("/new", function (req, res) {
 
 //Laver item
 app.post("/newItemCreated", function (req, res) {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let item = new itemTemplate(undefined,req.body.itemName,req.body.category,req.body.price,req.body.user_id,req.body.reusables)
 
   //Indsætter input i SQL
@@ -78,7 +78,7 @@ app.get("/showOwnItems", (req, res) => {
 
 // Slet egne varer
 app.post("/deleteOwnItems", (req, res) => {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let item = new itemTemplate(req.body.item_id)
 
   //Indsætter input til SQL-funktion
@@ -89,7 +89,7 @@ app.post("/deleteOwnItems", (req, res) => {
 
 // Opdater egne varer
 app.post("/updateOwnItems", (req, res) => {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let item = new itemTemplate(req.body.item_id,req.body.itemName,req.body.category_id,req.body.price,undefined,req.body.reusables)
 
   //Indsætter input til SQL-funktion
@@ -100,7 +100,7 @@ app.post("/updateOwnItems", (req, res) => {
 
 //Login admin
 app.post("/loginAdmin", function (req, res) {
-    //Henter localstorage data til skabelon
+    //Indsætter input i class så det bliver til objekt
     let user = new userTemplate(JSON.stringify(req.body.admin_id))
 
     //Tjekker om SQL-data bliver korrekt påvirket ved indsættelse af pågældende user_id fra localstorage
@@ -123,7 +123,7 @@ app.get("/showListofUsers", (req, res) => {
 
 // Slet user - admin funktionalitet
 app.post("/deleteUserAdmin", (req, res) => {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let user = new userTemplate(req.body.user_id)
   
 
@@ -135,7 +135,7 @@ app.post("/deleteUserAdmin", (req, res) => {
 
 // Slet egen bruger
 app.post("/deleteOwnUser", (req, res) => {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let user = new userTemplate(req.body.user_id)
 
     //Indsætter input i SQL-funktion
@@ -146,7 +146,7 @@ app.post("/deleteOwnUser", (req, res) => {
 
 // Opdater bruger fra Admin
 app.post("/updateUserAdmin", (req, res) => {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,req.body.gold,undefined,req.body.newRegion)
 
   //Indsætter input i SQL-funktion
@@ -157,7 +157,7 @@ app.post("/updateUserAdmin", (req, res) => {
 
 // Opdater egen bruger
 app.post("/updateUser", (req, res) => {
-  //Henter input til skabelon
+  //Indsætter input i class så det bliver til objekt
   let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,undefined,undefined,req.body.newRegion)
 
   //Indsætter input i SQL-funktion
