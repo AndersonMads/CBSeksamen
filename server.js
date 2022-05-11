@@ -19,6 +19,7 @@ app.listen(PORT, function () {
 //Henter classes til users og items herunder modeller
 const dboperationsUsers = require("./model/users");
 const dboperationsItems = require("./model/items");
+const dboperationsAdmins = require("./model/admins");
 const userTemplate = require("./model/userTemplate");
 const itemTemplate = require("./model/itemTemplate");
 
@@ -103,7 +104,7 @@ app.post("/loginAdmin", function (req, res) {
     let user = new userTemplate(JSON.stringify(req.body.admin_id))
 
     //Tjekker om SQL-data bliver korrekt påvirket ved indsættelse af pågældende user_id fra localstorage
-  dboperationsUsers.getAdmins(user.user_id).then((result) => {
+    dboperationsAdmins.getAdmins(user.user_id).then((result) => {
     if (result.rowsAffected[0] > 0) {
       res.status(200).send(result.recordset[0].adm);
     } else {
@@ -115,7 +116,7 @@ app.post("/loginAdmin", function (req, res) {
 //Ser antal annoncer pr bruger samt total antal
 app.get("/showListofUsers", (req, res) => {
     //Henter annoncer pr bruger samt total antal annoncer fra SQL
-  dboperationsUsers.showUsers().then((result) => {
+    dboperationsAdmins.showUsers().then((result) => {
     res.send(result.recordset);
   });
 });
@@ -127,7 +128,7 @@ app.post("/deleteUserAdmin", (req, res) => {
   
 
   //Indsætter input i SQL-funktion
-  dboperationsUsers.deleteUserAdmin(user.user_id).then((result) => {
+  dboperationsAdmins.deleteUserAdmin(user.user_id).then((result) => {
     res.status(204).json(result);
   });
 });
@@ -149,7 +150,7 @@ app.post("/updateUserAdmin", (req, res) => {
   let user = new userTemplate(req.body.user_id,req.body.newUsername,req.body.newPassword,undefined,req.body.gold,undefined,undefined,undefined,req.body.newRegion)
 
   //Indsætter input i SQL-funktion
-  dboperationsUsers.updateUserAdmin(user.user_id, user.username, user.password, user.gold, user.location).then((result) => {
+  dboperationsAdmins.updateUserAdmin(user.user_id, user.username, user.password, user.gold, user.location).then((result) => {
       res.status(204).json(result);
     });
 });

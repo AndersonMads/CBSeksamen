@@ -1,6 +1,13 @@
 class userTemplate {
+    #user_id;
+    #username;
+    #password;
+    #admin;
+    #gold;
+    #follow;
+
     constructor(user_id,username,password,admin,gold,follow,date_created,location_id,location) {
-        this.user_id = user_id;
+        this.#user_id = user_id;
         this.username = username;
         this.password = password;
         this.admin = admin;

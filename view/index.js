@@ -85,28 +85,26 @@ document.addEventListener("DOMContentLoaded", function () {
               (reusables == 0 || reusables == item.reusables) &&
               ((location == "all" && item.reusables == reusables) ||
                 (location == item.region && item.reusables == reusables))
-            ) {
+            ){
               list.innerHTML += `
                         <tr>
                             <td>${item.i_name}</td> 
                             <td>${item.price}</td>       
-                            <td>${new Date(
-                              item.date_created
-                            ).toLocaleDateString()}</td>
+                            <td>${new Date(item.date_created).toLocaleDateString()}</td>
                             <td>${item.region}</td>  
                             <td>${item.c_name}</td>
                             <td>${item.reusables}</td>
                             <td>${item.username}</td>
-                            <td>${item.gold}</td> 
-                            <td>${item.follow}</td>                            
+                            <td>${item.gold}</td>
+                            <td>${item.follow}</td>  
+                            <td><button type="submit" id="submitFollow">Follow</button></td>                            
                         </tr>
                         `;
             }
           });
           document.getElementById("product").innerHTML = showSelectedProducts;
         }
-      })
-      .catch((error) => {
+      }).catch((error) => {
         window.alert(error);
       });
   });
