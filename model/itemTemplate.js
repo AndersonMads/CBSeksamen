@@ -1,4 +1,16 @@
 class itemTemplate {
+    #item_id;
+    #i_name;
+    #category_id;
+    #price;
+    #user_id;
+    #reusables;
+    #category;
+    #date_created;
+    #follow;
+    #today_date_id;
+    #today_date;
+
     constructor(item_id,i_name,category_id,price,user_id,reusables,category,date_created,follow,today_date_id,today_date) {
         this.item_id = item_id;
         this.i_name = i_name;

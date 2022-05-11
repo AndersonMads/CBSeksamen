@@ -5,6 +5,9 @@ class userTemplate {
     #admin;
     #gold;
     #follow;
+    #date_created;
+    #location_id;
+    #location;
 
     constructor(user_id,username,password,admin,gold,follow,date_created,location_id,location) {
         this.#user_id = user_id;
