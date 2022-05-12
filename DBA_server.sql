@@ -5,7 +5,7 @@ SELECT *
 FROM today_date
 
 SELECT *
-FROM items
+FROM users
 
 SELECT *
 FROM dbo.today_date
@@ -44,8 +44,6 @@ SELECT i.id, i.i_name,i.price,i.date_created,i.reusables,i.follow,c,c_name
             INNER JOIN categories as c
                 ON c.id = i.category_id
 
-INSERT INTO items(i_name, category_id, price, date_created, user_id, reusables, follow, today_date_id)
-VALUES ('stol',4,300,'2022-04-21',3,1,0,1)
 
 SELECT i.i_name, i.price, i.reusables, i.follow, i.date_created, c.c_name, u.username, datediff(day,t.date_generated,i.date_created)*(-1) as date_difference, u.gold, l.region
         FROM items as i
